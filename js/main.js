@@ -11,6 +11,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const viewResult = document.getElementById('button1'); // View Result
     const downloadCert = document.getElementById('button2'); // download cert.
 
+    const downloadContainer = document.getElementById('downloadContainer');
+    const downloadOverlay = document.getElementById('downloadOverlay');
+    downloadOverlay.style.display = 'none'; // hide initially
+    downloadContainer.style.display = 'none'; // hide initially
+
+    const progressBar = document.getElementById('downloadBar');
+    const categorySelect = document.getElementById('categorySelect');
+
     /*get result modal box elements*/
     const emailBox = document.getElementById('emailBox');
     const closeBox = document.getElementById('closeBox');
@@ -33,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (this.value) {
         this.style.color = '#000';
     } else {
-        this.style.color = '#888';
+        this.style.color = '#999';
     }
     });
     let usersData = []; 
@@ -81,27 +89,40 @@ document.addEventListener('DOMContentLoaded', function() {
             const firstName = capitalize(document.getElementById('firstNameInput').value.trim());
             const lastName = capitalize(document.getElementById('lastNameInput').value.trim());
             const dob = document.getElementById('dobInput').value;
+            const email = document.getElementById('emailInput').value.trim();
             const categorySelect = document.getElementById('categorySelect');
             const selectedCategory = categorySelect.value;
-            if (!firstName || !lastName) {
+            if (!firstName) {
                 loadingOverlay2.classList.add('active');
                 setTimeout(() => {
                     errorBox.style.display = 'flex';
-                    errorText.textContent = "Please enter your names.";
+                    errorText.textContent = "Please enter your first name.";
                     loadingOverlay2.classList.remove('active');
-                }, 700);
+                }, 2000);
                 closeErrorBox.addEventListener('click', function() {
                     errorBox.style.display = 'none';
                 });
                 return;
             }
-            if (!dob) {
+            if (!lastName) {
                 loadingOverlay2.classList.add('active');
                 setTimeout(() => {
                     errorBox.style.display = 'flex';
-                    errorText.textContent = "Please enter your birth date.";
+                    errorText.textContent = "Please enter your last name.";
                     loadingOverlay2.classList.remove('active');
-                }, 700);
+                }, 2000);
+                closeErrorBox.addEventListener('click', function() {
+                    errorBox.style.display = 'none';
+                });
+                return;
+            }
+            if (!dob && !email) {
+                loadingOverlay2.classList.add('active');
+                setTimeout(() => {
+                    errorBox.style.display = 'flex';
+                    errorText.textContent = "Please enter your birth date or email address.";
+                    loadingOverlay2.classList.remove('active');
+                }, 2000);
                 closeErrorBox.addEventListener('click', function() {
                     errorBox.style.display = 'none';
                 });
@@ -113,26 +134,29 @@ document.addEventListener('DOMContentLoaded', function() {
                     errorBox.style.display = 'flex';
                     errorText.textContent = "Please select a category.";
                     loadingOverlay2.classList.remove('active');
-                }, 700);
+                }, 2000);
                 closeErrorBox.addEventListener('click', function() {
                     errorBox.style.display = 'none';
                 });
                 return;
             }
 
-            const user = usersData.find(u => capitalize(u.firstName) === firstName
-            && capitalize(u.lastName) === lastName 
-            && normalizeDate(u.dob) === dob
-            && u.category === selectedCategory);
+            const user = usersData.find(u => 
+                capitalize(u.firstName) === firstName &&
+                capitalize(u.lastName) === lastName &&
+                u.category === selectedCategory &&
+                (normalizeDate(u.dob) === dob || u.email.toLowerCase() === email.toLowerCase())
+            );
+
             if (user) {
                 loadingOverlay2.classList.add('active');
                 setTimeout(() => {
+                    document.getElementById('emailBox').style.display = 'none';
                     showResultModal(user, selectedCategory, cutoffScores);
                     categorySelect.selectedIndex = 0;
                     categorySelect.style.color = '#999';
-                    document.getElementById('emailBox').style.display = 'none';
                     loadingOverlay2.classList.remove('active');
-                }, 2000);
+                }, 3000);
                 document.querySelector('.close-result').addEventListener('click', () => {
                     document.getElementById('resultBox').style.display = 'none';
                     emailBox.style.display = 'none';
@@ -143,7 +167,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     errorBox.style.display = 'flex';
                     errorText.textContent = "Unable to find contestant.";
                     loadingOverlay2.classList.remove('active');
-                }, 700);
+                }, 2000);
                 closeErrorBox.addEventListener('click', function() {
                     errorBox.style.display = 'none';
                 });
@@ -152,27 +176,40 @@ document.addEventListener('DOMContentLoaded', function() {
             const firstName = capitalize(document.getElementById('firstNameInput').value.trim());
             const lastName = capitalize(document.getElementById('lastNameInput').value.trim());
             const dob = document.getElementById('dobInput').value;
+            const email = document.getElementById('emailInput').value.trim();
             const categorySelect = document.getElementById('categorySelect');
             const selectedCategory = categorySelect.value;
-            if (!firstName || !lastName) {
+            if (!firstName) {
                 loadingOverlay2.classList.add('active');
                 setTimeout(() => {
                     errorBox.style.display = 'flex';
-                    errorText.textContent = "Please enter your names.";
+                    errorText.textContent = "Please enter your first name.";
                     loadingOverlay2.classList.remove('active');
-                }, 700);
+                }, 2000);
                 closeErrorBox.addEventListener('click', function() {
                     errorBox.style.display = 'none';
                 });
                 return;
             }
-            if (!dob) {
+            if (!lastName) {
                 loadingOverlay2.classList.add('active');
                 setTimeout(() => {
                     errorBox.style.display = 'flex';
-                    errorText.textContent = "Please enter your birth date.";
+                    errorText.textContent = "Please enter your last name.";
                     loadingOverlay2.classList.remove('active');
-                }, 700);
+                }, 2000);
+                closeErrorBox.addEventListener('click', function() {
+                    errorBox.style.display = 'none';
+                });
+                return;
+            }
+            if (!dob && !email) {
+                loadingOverlay2.classList.add('active');
+                setTimeout(() => {
+                    errorBox.style.display = 'flex';
+                    errorText.textContent = "Please enter your birth date or email address.";
+                    loadingOverlay2.classList.remove('active');
+                }, 2000);
                 closeErrorBox.addEventListener('click', function() {
                     errorBox.style.display = 'none';
                 });
@@ -184,50 +221,29 @@ document.addEventListener('DOMContentLoaded', function() {
                     errorBox.style.display = 'flex';
                     errorText.textContent = "Please select a category.";
                     loadingOverlay2.classList.remove('active');
-                }, 700);
+                }, 2000);
                 closeErrorBox.addEventListener('click', function() {
                     errorBox.style.display = 'none';
                 });
                 return;
             }
 
-            const user = usersData.find(u => capitalize(u.firstName) === firstName
-            && capitalize(u.lastName) === lastName 
-            && normalizeDate(u.dob) === dob
-            && u.category === selectedCategory);
-            const overlayText = document.getElementById('overlayText');
-            const loadingOverlay = document.getElementById('loadingOverlay');
+            const user = usersData.find(u => 
+                capitalize(u.firstName) === firstName &&
+                capitalize(u.lastName) === lastName &&
+                u.category === selectedCategory &&
+                (normalizeDate(u.dob) === dob || u.email.toLowerCase() === email.toLowerCase())
+            );
 
             if (user && user.certificate) {
-                overlayText.textContent = "Preparing your download...";
-                loadingOverlay.classList.add('active');
-
-                setTimeout(() => {
-                    const directLink = getDirectDriveLink(user.certificate);
-                    const link = document.createElement('a');
-                    link.href = directLink;
-                    link.download = 'Certificate.pdf';
-                    link.click();
-
-                    overlayText.textContent = "Download Completed!";
-                    document.querySelector('.spinner').style.display = 'none';
-
-                    setTimeout(() => {
-                        loadingOverlay.classList.remove('active');
-                        document.querySelector('.spinner').style.display = 'block'; // reset spinner
-                        categorySelect.selectedIndex = 0;
-                        categorySelect.style.color = '#999';
-                        emailBox.style.display = 'none';
-                    }, 1500);
-
-                }, 3000);
+                downloadCertificate(user);
             } else {
                 loadingOverlay2.classList.add('active');
                 setTimeout(() => {
                     errorBox.style.display = 'flex';
                     errorText.textContent = "Unable to find contestant.";
                     loadingOverlay2.classList.remove('active');
-                }, 700);
+                }, 2000);
                 closeErrorBox.addEventListener('click', function() {
                     errorBox.style.display = 'none';
                 });
@@ -273,7 +289,7 @@ document.addEventListener('DOMContentLoaded', function() {
             messageText.textContent = 'Category: ' + selectedCategories + ' 2025';
             setTimeout(() => {
                 confetti({
-                    particleCount: 250,
+                    particleCount: 300,
                     spread: 300,
                     origin: { y: 0.55 },
                     ticks: 200
@@ -305,6 +321,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     /* ENQUIRY MODAL SET UP */
     document.querySelector("#enquiryModal .close-modal").onclick = function() {
+        document.getElementById("enquiryForm").reset();
         document.getElementById("enquiryModal").style.display = "none";
     }
     /* FUNCTION TO CONVERT DD/MM/YYYY TO YYYY-MM-DD */
@@ -327,11 +344,7 @@ document.addEventListener('DOMContentLoaded', function() {
     /* OPEN THE CONTACT US PAGE  */
     const contactText = document.querySelector(".nav-item:nth-child(2)");
     contactText.addEventListener("click", function() {
-        document.getElementById("loadingOverlay4").classList.add('active');
-        setTimeout(() => {
-            document.getElementById("enquiryModal").style.display = "block";
-            document.getElementById("loadingOverlay4").classList.remove('active');
-        }, 400);
+        document.getElementById("enquiryModal").style.display = "block";
     });
 
     /* FUNCTION TO SEND ENQUIRY EMAILJS AUTOMATIC */
@@ -405,6 +418,44 @@ document.addEventListener('DOMContentLoaded', function() {
             modal.style.display = "none";
         }
     });
+
+    /* DOWNLOAD CERTIFICATE WITH PROGRESS BAR */
+    function downloadCertificate(user) {
+        downloadOverlay.style.display = 'flex';
+        downloadContainer.style.display = 'flex';
+
+        progressBar.style.width = '0%'; // reset
+
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += Math.random() * 5; // uneven progress for realism
+            if (progress >= 100) {
+                const message = document.getElementById('downloadLabel');
+                setTimeout(() => {
+                    message.textContent = "Download Complete!";
+                }, 300);
+                progress = 100;
+                clearInterval(interval);
+
+                // Trigger download
+                const directLink = getDirectDriveLink(user.certificate);
+                const link = document.createElement('a');
+                link.href = directLink;
+                link.download = 'Certificate.pdf';
+                link.click();
+
+                setTimeout(() => {
+                    downloadOverlay.style.display = "none";
+                    downloadContainer.style.display = "none";
+                    message.textContent = "Downloading...";
+                    emailBox.style.display = 'none';
+                    document.getElementById("categorySelect").selectedIndex = 0;
+                    document.getElementById("categorySelect").style.color = "#999";
+                }, 5000);
+            }
+            progressBar.style.width = progress + '%';
+        }, 200); // update every 200ms
+    }
 
 
     

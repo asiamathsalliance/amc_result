@@ -16,10 +16,6 @@ body {
   resize: none;
 }
 
-#enquiryModal .modal-content {
-    max-height: 80vh;     /* 80% of viewport height */
-    overflow-y: auto;      /* allow scrolling if content exceeds max-height */
-}
 
 body::before {
   content: "";                  /* required for pseudo-element */
@@ -121,7 +117,7 @@ button:hover {
   text-align: center;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 18px;
-  min-width: 450px;
+  min-width: 500px;
   max-width: 90%;
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   
@@ -131,6 +127,8 @@ button:hover {
   align-items: center;
   gap: 15px;
 }
+
+
 
 /* Inputs and dropdowns */
 .modal-content input{
@@ -147,7 +145,7 @@ button:hover {
   padding: 10px 45px 10px 12px;   /* extra room on right for arrow */
   font-size: 16px;
   border-radius: 5px;
-  color: #888;
+  color: #999;
   border: 1px solid #ccc;
   font-family: Verdana, sans-serif;
   background-color: white;
@@ -270,7 +268,7 @@ button:hover {
 input::placeholder {
     font-size: 16px;
     font-weight: 500;
-    color: #888; /* gray placeholder color */
+    color: #999; /* gray placeholder color */
 }
 
 .loading-overlay {
@@ -295,7 +293,7 @@ input::placeholder {
 }
 
 #loadingOverlay3 {
-  background-color: rgba(0,0,0,0.1); /* darker background */
+  background-color: rgba(0,0,0,0.25); /* darker background */
 }
 
 #loadingOverlay4 {
@@ -307,19 +305,19 @@ input::placeholder {
 }
 
 .spinner {
-  border: 5px solid rgba(255, 255, 255, 0.3);
-  border-top: 5px solid white;
+  border: 4px solid #ededed;
   border-radius: 50%;
   width: 50px;
   height: 50px;
-  animation: spin 1s linear infinite;
-  margin-bottom: 15px;
+  border-left-color: #ff9100;
+  animation: spin 1.2s ease-in-out infinite;
 }
 
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
 
 input {
   font-family: Verdana, Geneva, sans-serif;
@@ -335,7 +333,7 @@ input {
 .input-group {
     width: 100%;
     text-align: left;
-    margin-top: 5px;        /* slightly more separation */
+    margin-top: 3px;        /* slightly more separation */
 }
 
 
@@ -345,27 +343,48 @@ input {
 
 #categorySelect input::placeholder {
      font-size: 16px;
+     color: #999
 }
+
+#enquiryCategory input::placeholder {
+    color: #999;
+}
+
+
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="date"]::placeholder {
+    font-size: 16px;
+    color: #999; /* optional: make placeholder slightly gray */
+}
+
 
 
 .input-group input::placeholder,
 .input-group textarea::placeholder {
     font-size: 16px !important;
-    color: #888; /* optional: slightly lighter for better UX */
+    color: #999; /* optional: slightly lighter for better UX */
 }
 
 /* Label styling */
 .input-group label {
     display: block;
-    margin-bottom: 10px;     /* more space above input */
+    margin-top: 3px;
+    margin-bottom: 6px;     /* more space above input */
     font-size: 16px !important;
     font-weight: 400;        /* unbold */
     color: #000000;   
 }
 
+#headerMessage {
+    font-size: 28px !important;
+    margin-top: 10px;
+    margin-bottom: 24px;
+}
+
 
 /* Input + Select styling */
-#categorySelect, #schoolSelect, #dobInput, #firstNameInput, #lastNameInput {
+#categorySelect, #schoolSelect, #dobInput, #emailInput, #schoolSelect, #lastNameInput {
     width: 100%;
     padding: 12px;
     font-size: 16px;
@@ -373,7 +392,7 @@ input {
     border-radius: 0px;
     font-family: inherit;
     box-sizing: border-box;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
 }
 
 /* Buttons moved downward */
@@ -381,7 +400,7 @@ input {
     margin-top: 20px;        /* more space between inputs and buttons */
     display: flex;
     justify-content: center;
-    gap: 25px;
+    gap: 30px;
 }
 
 #emailBox .modal-buttons {
@@ -390,11 +409,14 @@ input {
 
 .name-row {
     display: flex;
-    gap: 30px;
+    gap: 7px !important;
+    align-items: flex-start;
 }
 
-.name-field input {
+
+.name-field input, .dob-field input {
     width: 100%;
+    height: 44px;
     box-sizing: border-box;
     font-size: 16px;
     padding: 6px 8px;
@@ -416,11 +438,12 @@ input:focus {
     box-shadow: none;
 }
 
-.name-field {
+.name-field, .dob-field {
     flex: 1; /* Each box takes equal width */
     display: flex;
     flex-direction: column;
 }
+
 
 
 #certBox .modal-content {
@@ -498,7 +521,7 @@ input:focus {
 /* Placeholder text */
 input::placeholder {
   font-size: 14px;
-  color: #888;
+  color: #999;
 }
 
 #emailBox .modal-content {
@@ -508,6 +531,14 @@ input::placeholder {
 
 #categorySelect option[value=""] {
   color: #999; /* placeholder light gray */
+}
+
+#enquiryCategory {
+  color: #999;
+}
+
+#enquiryCategory:valid {
+  color: #000;
 }
 
 #dobInput {
@@ -537,7 +568,7 @@ dobInput::-webkit-datetime-edit {
 }
 
 #errorModal .modal-content {
-  width: 23%;          /* can adjust width */
+  width: 26%;          /* can adjust width */
   max-width: 400px;
   min-width: 230px;
   padding: 30px;
@@ -684,14 +715,17 @@ dobInput::-webkit-datetime-edit {
 #downloadLink a {
     color: #007BFF;        /* normal link color */
     text-decoration: underline; /* remove underline */
-    transition: color 0.2s ease;
+    display: inline-block;
+    transition: transform 0.2s ease, color 0.2s ease;
 }
 
 #downloadLink a:hover {
     color: #0056b3;        /* darker shade on hover */
     text-decoration: underline; /* optional underline */
-    transform: scale(5);
+    transform: scale(1.04);
 }
+
+
 
 /* Top gradient background */
 .top-gradient {
@@ -746,33 +780,46 @@ dobInput::-webkit-datetime-edit {
 }
 
 
+
+
 /* ENQUIRY MODAL DON'T TOUCH ! */
 #enquiryModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none; 
   box-shadow:  rgba(0,0,0,0.25); /* visible shadow */
-  top: 2%;
-  max-height: 100vh;         /* allow it to grow a little more toward bottom */
-  overflow-y: auto; 
+  justify-content: center;
+  align-items: flex-start; 
+  z-index: 9999;
 }
 
 #enquiryModal .modal-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+
   max-width: 550px;          /* limit width */
   max-height: 80vh;
   margin: 100px auto;        /* center vertically */
   padding: 30px;
-  position: relative;
+  
   border-radius: 10px;
   box-shadow: rgba(0,0,0,0.25);
   background-color: white;
+  margin: 80px auto;
 }
 
 #enquiryModal h2 {
   text-align: center;
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   
 }
 
 #enquiryModal .modal-content input,
+#enquiryModal .modal-content select,
 #enquiryModal .modal-content textarea {
   display: block;               /* each input is block-level */
   width: 500px;
@@ -785,6 +832,10 @@ dobInput::-webkit-datetime-edit {
   text-align: left !important;
 }
 
+#enquiryModal .modal-content textarea {
+  margin-bottom: 25px !important;
+}
+
 #enquiryModal .modal-content label {
   display: block;            /* each label on its own line */
   width: 500px;              /* match the input field width */
@@ -792,21 +843,23 @@ dobInput::-webkit-datetime-edit {
   font-weight: normal;         /* optional: make it stand out */
   text-align: left;          /* align text to left edge of the label/input */
   font-size: 16px;
+  margin-bottom: 6px;
 }
 
 input::placeholder,
+select::placeholder,
 textarea::placeholder {
   font-size: 14px;       /* change to whatever size you want */
-  color: #888;           /* optional: change color */
+  color: #999;           /* optional: change color */
   font-weight: normal;   /* optional */
   font-family: Arial, sans-serif; /* optional */
 }
 
 .enquiry-subtext {
-    font-size: 16px;
+    font-size: 14px;
     color: #000000;        /* soft dark grey */
     margin-top: -10px;  /* pull slightly closer to header */
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     text-align: center;   /* align with form labels */
     font-style: italic;
 }
@@ -821,8 +874,8 @@ textarea::placeholder {
   background-color: #333;
   color: white;
   border: none;
-  padding: 12px 24px;
-  border-radius: 6px;
+  padding: 10px 20px;
+  border-radius: 4px;
   cursor: pointer;
   transition: background 0.3s ease, transform 0.2s ease;
 }
@@ -853,7 +906,7 @@ textarea::placeholder {
 #enquiryMessage::placeholder {
     font-size: 14px;
     font-weight: 500;
-    color: #888; /* gray placeholder color */
+    color: #999; /* gray placeholder color */
 }
 
 
@@ -865,13 +918,81 @@ textarea::placeholder {
 }
 #enquiryModal .close-modal {
   color: #999;
-  transform: transform 0.3s ease;
+  transform: transform 1s ease;
 }
 
 #enquiryModal .modal-content button {
-  width: 110px;      /* smaller width */
-  padding: 10px 12px; /* smaller height */
-  font-size: 18.5px;   /* smaller text */
+  width: 95px;      /* smaller width */
+  padding: 8px 10px; /* smaller height */
+  font-size: 15px;   /* smaller text */
   margin: 0 auto;    /* center horizontally */
   display: block;
+}
+
+
+
+
+
+#downloadContainer {
+    width: 300px;          /* width of the rectangle */
+    margin-top: 15px;
+    font-family: sans-serif;
+    font-size: 18px;
+}
+
+#downloadContainer {
+    width: 300px;
+    margin-top: 15px;
+    margin: 0 auto;  /* centers horizontally */
+    text-align: left;    
+    font-family: sans-serif;
+    font-size: 18px;
+    
+}
+
+#downloadOverlay {
+    position: fixed;
+    display: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.45);
+    display: none;              /* JS will set this to flex */
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+}
+#downloadBarWrapper {
+    display: flex;
+    flex-direction: column;      /* stack label above bar */
+    align-items: stretch;      /* make bar full width */
+    width: 100%;   
+    gap: 10px;
+}
+
+#downloadLabel {
+    color: white;
+    margin-bottom: 4px;
+    font-weight: bold;
+    text-align: left;
+}
+
+#downloadBarContainer {
+    width: 100%;
+    height: 20px;          /* height of the bar */
+    background-color: #eee;
+    border-radius: 1px;
+    overflow: hidden;
+    position: relative;
+    padding: 2px;                /* outline spacing */
+    box-sizing: border-box;
+}
+
+#downloadBar {
+    width: 0%;
+    height: 100%;
+    background-color: #ff9100;   /* fill color */
+    border-radius: 1px;
+    transition: width 0.2s ease;
 }
