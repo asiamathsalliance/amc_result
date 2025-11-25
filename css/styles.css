@@ -194,6 +194,14 @@ button:hover {
   cursor: pointer;
 }
 
+#submitEmail, #closeBox {
+  font-size: 16px;
+}
+
+#errorModal .modal-content {
+  font-size: 14px;
+}
+
 
 #submitEmail {
   transition: background-color 0.4s ease, transform 0.3s ease;
@@ -327,26 +335,37 @@ input {
 .input-group {
     width: 100%;
     text-align: left;
-    margin-top: 10px;        /* slightly more separation */
+    margin-top: 5px;        /* slightly more separation */
 }
 
-#emailInput,
+
 #categorySelect {
     border-radius: 0px;   /* change to 0 if you want perfectly square */
+}
+
+#categorySelect input::placeholder {
+     font-size: 16px;
+}
+
+
+.input-group input::placeholder,
+.input-group textarea::placeholder {
+    font-size: 16px !important;
+    color: #888; /* optional: slightly lighter for better UX */
 }
 
 /* Label styling */
 .input-group label {
     display: block;
     margin-bottom: 10px;     /* more space above input */
-    font-size: 16px;
+    font-size: 16px !important;
     font-weight: 400;        /* unbold */
     color: #000000;   
 }
 
+
 /* Input + Select styling */
-#emailInput,
-#categorySelect {
+#categorySelect, #schoolSelect, #dobInput, #firstNameInput, #lastNameInput {
     width: 100%;
     padding: 12px;
     font-size: 16px;
@@ -354,16 +373,54 @@ input {
     border-radius: 0px;
     font-family: inherit;
     box-sizing: border-box;
+    margin-bottom: 5px;
 }
 
 /* Buttons moved downward */
 .modal-buttons {
-    margin-top: 35px;        /* more space between inputs and buttons */
+    margin-top: 20px;        /* more space between inputs and buttons */
     display: flex;
     justify-content: center;
     gap: 25px;
 }
 
+#emailBox .modal-buttons {
+  margin-top: 10px !important;
+}
+
+.name-row {
+    display: flex;
+    gap: 30px;
+}
+
+.name-field input {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 16px;
+    padding: 6px 8px;
+    border-radius: 0px;
+    border: 1px solid #ccc;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 16px;
+    padding: 6px 8px;
+    border-radius: 0px;
+    border: 1px solid #ccc;
+}
+
+input:focus {
+    box-shadow: none;
+}
+
+.name-field {
+    flex: 1; /* Each box takes equal width */
+    display: flex;
+    flex-direction: column;
+}
 
 
 #certBox .modal-content {
@@ -440,19 +497,23 @@ input {
 
 /* Placeholder text */
 input::placeholder {
+  font-size: 14px;
   color: #888;
 }
 
 #emailBox .modal-content {
-  width: 150%;          /* wider modal */
-  max-width: 500px;    /* optional max size */
-  min-width: 400px;    /* optional min size */
+  width: 100%;          /* wider modal */
+  max-width: 350px;    /* optional max size */
 }
 
 #categorySelect option[value=""] {
   color: #999; /* placeholder light gray */
 }
 
+#dobInput {
+    color: #999; /* placeholder gray initially */
+    font-size: 14px;
+}
 #certBox select {
     color: #999; /* placeholder gray initially */
 }
@@ -460,8 +521,23 @@ input::placeholder {
     color: #000;
 }
 
+#schoolSelect {
+    color: #999; /* placeholder gray initially */
+}
+#schoolSelect:valid {
+    color: #000;
+}
+
+dobInput::-webkit-datetime-edit {
+    color: #999; /* placeholder gray initially */
+}
+
+#dobInput:valid {
+    color: #000;
+}
+
 #errorModal .modal-content {
-  width: 19%;          /* can adjust width */
+  width: 23%;          /* can adjust width */
   max-width: 400px;
   min-width: 230px;
   padding: 30px;
@@ -598,7 +674,7 @@ input::placeholder {
   height: 450px;            /* adjust as you wish */
   text-align: center;
   padding: 40px;
-  min-width: 475px;
+  min-width: 450px;
   border-radius: 5px;
   background-color: white;
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
@@ -720,7 +796,7 @@ input::placeholder {
 
 input::placeholder,
 textarea::placeholder {
-  font-size: 15px;       /* change to whatever size you want */
+  font-size: 14px;       /* change to whatever size you want */
   color: #888;           /* optional: change color */
   font-weight: normal;   /* optional */
   font-family: Arial, sans-serif; /* optional */
@@ -775,7 +851,7 @@ textarea::placeholder {
 }
 
 #enquiryMessage::placeholder {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
     color: #888; /* gray placeholder color */
 }

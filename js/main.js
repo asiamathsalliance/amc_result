@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let usersData = []; 
     async function loadUsers() {
         try {
-            const response = await fetch("amc-online-data.json");
+            const response = await fetch("test dob.json");
             usersData = await response.json(); 
             console.log(usersData); 
         } catch (error) {
@@ -53,8 +53,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 
-
+    const headerMessage = document.getElementById('headerMessage');
     viewResult.addEventListener('click', function() {
+        const headerMessage = document.getElementById('headerMessage');
+        headerMessage.textContent = "Check Your Result!";
         emailBox.style.display = 'flex';
         emailInput.value = ''; // Clear previous input
     });
@@ -63,135 +65,176 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     downloadCert.addEventListener('click', function() {
-        certBox.style.display = 'flex';
-        emailInput2.value = ''; // Clear previous input
+        const headerMessage = document.getElementById('headerMessage');
+        headerMessage.textContent = "Download Your Certificate!";
+        emailBox.style.display = 'flex';
+        emailInput.value = ''; // Clear previous input
     });
     closeBox2.addEventListener('click', function() {
-        certBox.style.display = 'none';
+        emailBox.style.display = 'none';
     });
 
 
     /* CHECK RESULT SUBMIT BUTTON */
     submitEmail.addEventListener('click', function() {
-        const email = emailInput.value.trim().toLowerCase();
-        const categorySelect = document.getElementById('categorySelect');
-        const selectedCategory = categorySelect.value;
-        if (!email) {
-            loadingOverlay2.classList.add('active');
-            setTimeout(() => {
-                errorBox.style.display = 'flex';
-                errorText.textContent = "Please enter an email.";
-                loadingOverlay2.classList.remove('active');
-            }, 700);
-            closeErrorBox.addEventListener('click', function() {
-                errorBox.style.display = 'none';
-            });
-            return;
-        }
-        if(!selectedCategory) {
-            loadingOverlay2.classList.add('active');
-            setTimeout(() => {
-                errorBox.style.display = 'flex';
-                errorText.textContent = "Please select a category.";
-                loadingOverlay2.classList.remove('active');
-            }, 700);
-            closeErrorBox.addEventListener('click', function() {
-                errorBox.style.display = 'none';
-            });
-            return;
-        }
+        if(headerMessage.textContent === "Check Your Result!") {
+            const firstName = capitalize(document.getElementById('firstNameInput').value.trim());
+            const lastName = capitalize(document.getElementById('lastNameInput').value.trim());
+            const dob = document.getElementById('dobInput').value;
+            const categorySelect = document.getElementById('categorySelect');
+            const selectedCategory = categorySelect.value;
+            if (!firstName || !lastName) {
+                loadingOverlay2.classList.add('active');
+                setTimeout(() => {
+                    errorBox.style.display = 'flex';
+                    errorText.textContent = "Please enter your names.";
+                    loadingOverlay2.classList.remove('active');
+                }, 700);
+                closeErrorBox.addEventListener('click', function() {
+                    errorBox.style.display = 'none';
+                });
+                return;
+            }
+            if (!dob) {
+                loadingOverlay2.classList.add('active');
+                setTimeout(() => {
+                    errorBox.style.display = 'flex';
+                    errorText.textContent = "Please enter your birth date.";
+                    loadingOverlay2.classList.remove('active');
+                }, 700);
+                closeErrorBox.addEventListener('click', function() {
+                    errorBox.style.display = 'none';
+                });
+                return;
+            }
+            if(!selectedCategory) {
+                loadingOverlay2.classList.add('active');
+                setTimeout(() => {
+                    errorBox.style.display = 'flex';
+                    errorText.textContent = "Please select a category.";
+                    loadingOverlay2.classList.remove('active');
+                }, 700);
+                closeErrorBox.addEventListener('click', function() {
+                    errorBox.style.display = 'none';
+                });
+                return;
+            }
 
-        const user = usersData.find(u => u.email.toLowerCase() === email && u.category === selectedCategory);
-        if (user) {
-            loadingOverlay2.classList.add('active');
-            setTimeout(() => {
-                showResultModal(user, selectedCategory, cutoffScores);
-                loadingOverlay2.classList.remove('active');
-            }, 2000);
-            document.querySelector('.close-result').addEventListener('click', () => {
-                document.getElementById('resultBox').style.display = 'none';
-                emailBox.style.display = 'none';
-            });
+            const user = usersData.find(u => capitalize(u.firstName) === firstName
+            && capitalize(u.lastName) === lastName 
+            && normalizeDate(u.dob) === dob
+            && u.category === selectedCategory);
+            if (user) {
+                loadingOverlay2.classList.add('active');
+                setTimeout(() => {
+                    showResultModal(user, selectedCategory, cutoffScores);
+                    categorySelect.selectedIndex = 0;
+                    categorySelect.style.color = '#999';
+                    document.getElementById('emailBox').style.display = 'none';
+                    loadingOverlay2.classList.remove('active');
+                }, 2000);
+                document.querySelector('.close-result').addEventListener('click', () => {
+                    document.getElementById('resultBox').style.display = 'none';
+                    emailBox.style.display = 'none';
+                });
+            } else {
+                loadingOverlay2.classList.add('active');
+                setTimeout(() => {
+                    errorBox.style.display = 'flex';
+                    errorText.textContent = "Unable to find contestant.";
+                    loadingOverlay2.classList.remove('active');
+                }, 700);
+                closeErrorBox.addEventListener('click', function() {
+                    errorBox.style.display = 'none';
+                });
+            }
         } else {
-            loadingOverlay2.classList.add('active');
-            setTimeout(() => {
-                errorBox.style.display = 'flex';
-                errorText.textContent = "Unable to find contestant.";
-                loadingOverlay2.classList.remove('active');
-            }, 700);
-            closeErrorBox.addEventListener('click', function() {
-                errorBox.style.display = 'none';
-            });
-        }
-        
-    });
+            const firstName = capitalize(document.getElementById('firstNameInput').value.trim());
+            const lastName = capitalize(document.getElementById('lastNameInput').value.trim());
+            const dob = document.getElementById('dobInput').value;
+            const categorySelect = document.getElementById('categorySelect');
+            const selectedCategory = categorySelect.value;
+            if (!firstName || !lastName) {
+                loadingOverlay2.classList.add('active');
+                setTimeout(() => {
+                    errorBox.style.display = 'flex';
+                    errorText.textContent = "Please enter your names.";
+                    loadingOverlay2.classList.remove('active');
+                }, 700);
+                closeErrorBox.addEventListener('click', function() {
+                    errorBox.style.display = 'none';
+                });
+                return;
+            }
+            if (!dob) {
+                loadingOverlay2.classList.add('active');
+                setTimeout(() => {
+                    errorBox.style.display = 'flex';
+                    errorText.textContent = "Please enter your birth date.";
+                    loadingOverlay2.classList.remove('active');
+                }, 700);
+                closeErrorBox.addEventListener('click', function() {
+                    errorBox.style.display = 'none';
+                });
+                return;
+            }
+            if(!selectedCategory) {
+                loadingOverlay2.classList.add('active');
+                setTimeout(() => {
+                    errorBox.style.display = 'flex';
+                    errorText.textContent = "Please select a category.";
+                    loadingOverlay2.classList.remove('active');
+                }, 700);
+                closeErrorBox.addEventListener('click', function() {
+                    errorBox.style.display = 'none';
+                });
+                return;
+            }
 
-    /* DOWNLOAD CERTIFICATE SUBMIT BUTTON */
-    submitEmail2.addEventListener('click', function() {
-        const email = emailInput2.value.trim().toLowerCase();
-        const certCategorySelect = document.getElementById('certCategorySelect');
-        const certSelectedCategory = certCategorySelect.value;
-        if (!email) {
-            loadingOverlay2.classList.add('active');
-            setTimeout(() => {
-                errorBox.style.display = 'flex';
-                errorText.textContent = "Please enter an email.";
-                loadingOverlay2.classList.remove('active');
-            }, 700);
-            closeErrorBox.addEventListener('click', function() {
-                errorBox.style.display = 'none';
-            });
-            return;
-        }
-        if(!certSelectedCategory) {
-            loadingOverlay2.classList.add('active');
-            setTimeout(() => {
-                errorBox.style.display = 'flex';
-                errorText.textContent = "Please select a category.";
-                loadingOverlay2.classList.remove('active');
-            }, 700);
-            closeErrorBox.addEventListener('click', function() {
-                errorBox.style.display = 'none';
-            });
-            return;
-        }
+            const user = usersData.find(u => capitalize(u.firstName) === firstName
+            && capitalize(u.lastName) === lastName 
+            && normalizeDate(u.dob) === dob
+            && u.category === selectedCategory);
+            const overlayText = document.getElementById('overlayText');
+            const loadingOverlay = document.getElementById('loadingOverlay');
 
-        const user = usersData.find(u => u.email.toLowerCase() === email && u.category === certSelectedCategory);
-        const overlayText = document.getElementById('overlayText');
-        const loadingOverlay = document.getElementById('loadingOverlay');
-
-        if (user && user.certificate) {
-            overlayText.textContent = "Preparing your download...";
-            loadingOverlay.classList.add('active');
-
-            setTimeout(() => {
-                const directLink = getDirectDriveLink(user.certificate);
-                const link = document.createElement('a');
-                link.href = directLink;
-                link.download = 'Certificate.pdf';
-                link.click();
-
-                overlayText.textContent = "Download Completed!";
-                document.querySelector('.spinner').style.display = 'none';
+            if (user && user.certificate) {
+                overlayText.textContent = "Preparing your download...";
+                loadingOverlay.classList.add('active');
 
                 setTimeout(() => {
-                    loadingOverlay.classList.remove('active');
-                    document.querySelector('.spinner').style.display = 'block'; // reset spinner
-                    certBox.style.display = 'none';
-                }, 1500);
+                    const directLink = getDirectDriveLink(user.certificate);
+                    const link = document.createElement('a');
+                    link.href = directLink;
+                    link.download = 'Certificate.pdf';
+                    link.click();
 
-            }, 3000);
-        } else {
-            loadingOverlay2.classList.add('active');
-            setTimeout(() => {
-                errorBox.style.display = 'flex';
-                errorText.textContent = "Unable to find contestant.";
-                loadingOverlay2.classList.remove('active');
-            }, 700);
-            closeErrorBox.addEventListener('click', function() {
-                errorBox.style.display = 'none';
-            });
+                    overlayText.textContent = "Download Completed!";
+                    document.querySelector('.spinner').style.display = 'none';
+
+                    setTimeout(() => {
+                        loadingOverlay.classList.remove('active');
+                        document.querySelector('.spinner').style.display = 'block'; // reset spinner
+                        categorySelect.selectedIndex = 0;
+                        categorySelect.style.color = '#999';
+                        emailBox.style.display = 'none';
+                    }, 1500);
+
+                }, 3000);
+            } else {
+                loadingOverlay2.classList.add('active');
+                setTimeout(() => {
+                    errorBox.style.display = 'flex';
+                    errorText.textContent = "Unable to find contestant.";
+                    loadingOverlay2.classList.remove('active');
+                }, 700);
+                closeErrorBox.addEventListener('click', function() {
+                    errorBox.style.display = 'none';
+                });
+            }
+
         }
+        
     });
 
     document.getElementById('closeError').addEventListener('click', function() {
@@ -252,10 +295,10 @@ document.addEventListener('DOMContentLoaded', function() {
             // Close the result box
             event.preventDefault(); // prevent the page from jumping
             document.getElementById("resultBox").style.display = "none";
-            document.getElementById("emailBox").style.display = "none";
 
             // Open the certificate box
-            document.getElementById("certBox").style.display = "flex";
+            headerMessage.textContent = "Download Your Certificate!";
+            document.getElementById("emailBox").style.display = "flex";
             loadingOverlay3.classList.remove('active');
         }, 1250);
     });
@@ -263,6 +306,22 @@ document.addEventListener('DOMContentLoaded', function() {
     /* ENQUIRY MODAL SET UP */
     document.querySelector("#enquiryModal .close-modal").onclick = function() {
         document.getElementById("enquiryModal").style.display = "none";
+    }
+    /* FUNCTION TO CONVERT DD/MM/YYYY TO YYYY-MM-DD */
+    function normalizeDate(dateStr) {
+        if (!dateStr) return null;
+
+        // Replace '-' with '/' for easier splitting
+        const cleanStr = dateStr.replace(/-/g, '/');
+        const parts = cleanStr.split('/');
+
+        if (parts[0].length === 4) {
+            // Already in YYYY/MM/DD
+            return `${parts[0]}-${parts[1].padStart(2,'0')}-${parts[2].padStart(2,'0')}`;
+        } else {
+            // DD/MM/YYYY format → convert to YYYY-MM-DD
+            return `${parts[2]}-${parts[1].padStart(2,'0')}-${parts[0].padStart(2,'0')}`;
+        }
     }
 
     /* OPEN THE CONTACT US PAGE  */
