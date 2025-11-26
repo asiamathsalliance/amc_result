@@ -384,8 +384,8 @@ input[type="date"]::placeholder {
 
 
 /* Input + Select styling */
-#categorySelect, #schoolSelect, #dobInput, #emailInput, #schoolSelect, #lastNameInput {
-    height: 40px;
+#categorySelect, #schoolSelect, #dobInput, #emailInput, #schoolSelect, #firstNameInput, #lastNameInput {
+    height: 45px;
     width: 100%;
     padding: 12px;
     font-size: 16px;
@@ -395,6 +395,7 @@ input[type="date"]::placeholder {
     box-sizing: border-box;
     margin-bottom: 3px;
 }
+
 
 /* Buttons moved downward */
 .modal-buttons {
@@ -935,15 +936,14 @@ textarea::placeholder {
 
 
 #downloadContainer {
-    width: 300px;          /* width of the rectangle */
-    margin-top: 15px;
+    width: 350px;          /* width of the rectangle */
+
     font-family: sans-serif;
     font-size: 18px;
 }
 
 #downloadContainer {
-    width: 300px;
-    margin-top: 15px;
+
     margin: 0 auto;  /* centers horizontally */
     text-align: left;    
     font-family: sans-serif;

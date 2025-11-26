@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
         "AMC 12A": 1176.5,
         "AMC 12B": 1188.5
     };
+
     const loadingOverlay2 = document.getElementById('loadingOverlay2');
     const loadingOverlay4 = document.getElementById('loadingOverlay4');
 
@@ -47,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let usersData = []; 
     async function loadUsers() {
         try {
-            const response = await fetch("test dob.json");
+            const response = await fetch("first data amc.json");
             usersData = await response.json(); 
             console.log(usersData); 
         } catch (error) {
@@ -70,6 +71,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     closeBox.addEventListener('click', function() {
         emailBox.style.display = 'none';
+        document.getElementById("categorySelect").selectedIndex = 0;
+        document.getElementById("categorySelect").style.color = "#999";
     });
 
     downloadCert.addEventListener('click', function() {
@@ -141,12 +144,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            const user = usersData.find(u => 
-                capitalize(u.firstName) === firstName &&
-                capitalize(u.lastName) === lastName &&
+            const user = usersData.find(u =>
+                u.fullName.toLowerCase().includes(firstName.toLowerCase()) &&
+                u.fullName.toLowerCase().includes(lastName.toLowerCase()) &&
                 u.category === selectedCategory &&
-                (normalizeDate(u.dob) === dob || u.email.toLowerCase() === email.toLowerCase())
-            );
+                (normalizeDate(u.dob) === dob ||
+                u.email.toLowerCase() === email.toLowerCase())
+            );        
 
             if (user) {
                 loadingOverlay2.classList.add('active');
@@ -228,12 +232,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            const user = usersData.find(u => 
-                capitalize(u.firstName) === firstName &&
-                capitalize(u.lastName) === lastName &&
+            const user = usersData.find(u =>
+                u.fullName.toLowerCase().includes(firstName.toLowerCase()) &&
+                u.fullName.toLowerCase().includes(lastName.toLowerCase()) &&
                 u.category === selectedCategory &&
-                (normalizeDate(u.dob) === dob || u.email.toLowerCase() === email.toLowerCase())
-            );
+                (normalizeDate(u.dob) === dob ||
+                u.email.toLowerCase() === email.toLowerCase())
+            );  
 
             if (user && user.certificate) {
                 downloadCertificate(user);
@@ -241,7 +246,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 loadingOverlay2.classList.add('active');
                 setTimeout(() => {
                     errorBox.style.display = 'flex';
-                    errorText.textContent = "Unable to find contestant.";
+                    errorText.textContent = "Certificate has not released yet.";
                     loadingOverlay2.classList.remove('active');
                 }, 2000);
                 closeErrorBox.addEventListener('click', function() {
@@ -367,23 +372,8 @@ document.addEventListener('DOMContentLoaded', function() {
             form.reportValidity();
             return;
         } else {
-            event.preventDefault();
-            sendEnquiryEmail();
-            overlayText.textContent = "Submitting your enquiry...";
-            loadingOverlay.classList.add('active');
-            setTimeout(() => {
-                overlayText.textContent = "We have received your enquiry!";
-                document.querySelector('.spinner').style.display = 'none';
-
-                setTimeout(() => {
-                    loadingOverlay.classList.remove('active');
-                    document.querySelector('.spinner').style.display = 'block'; // reset spinner
-                    document.getElementById("enquiryModal").style.display = "none";
-                    document.getElementById("enquiryMessage").value = "";
-                }, 2500);
-            }, 4300);
-        }
-        
+            submitEnquiry();
+        }     
     });
 
 
@@ -423,6 +413,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function downloadCertificate(user) {
         downloadOverlay.style.display = 'flex';
         downloadContainer.style.display = 'flex';
+        const message = document.getElementById('downloadLabel');
+        message.textContent = "Downloading...";
 
         progressBar.style.width = '0%'; // reset
 
@@ -430,7 +422,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const interval = setInterval(() => {
             progress += Math.random() * 5; // uneven progress for realism
             if (progress >= 100) {
-                const message = document.getElementById('downloadLabel');
                 setTimeout(() => {
                     message.textContent = "Download Complete!";
                 }, 300);
@@ -447,11 +438,42 @@ document.addEventListener('DOMContentLoaded', function() {
                 setTimeout(() => {
                     downloadOverlay.style.display = "none";
                     downloadContainer.style.display = "none";
-                    message.textContent = "Downloading...";
+                    message.textContent = "";
                     emailBox.style.display = 'none';
                     document.getElementById("categorySelect").selectedIndex = 0;
                     document.getElementById("categorySelect").style.color = "#999";
                 }, 5000);
+            }
+            progressBar.style.width = progress + '%';
+        }, 200); // update every 200ms
+    }
+
+    function submitEnquiry() {
+        sendEnquiryEmail();
+        downloadOverlay.style.display = 'flex';
+        downloadContainer.style.display = 'flex';
+        const message = document.getElementById('downloadLabel');
+        message.textContent = "Submitting enquiry...";
+
+        progressBar.style.width = '0%'; // reset
+
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += Math.random() * 5; // uneven progress for realism
+            if (progress >= 100) {
+                setTimeout(() => {
+                    message.textContent = "We have received your enquiry!";
+                }, 300);
+                progress = 100;
+                clearInterval(interval);
+                
+                setTimeout(() => {
+                    downloadOverlay.style.display = "none";
+                    downloadContainer.style.display = "none";
+                    message.textContent = "";
+                    document.getElementById("enquiryModal").style.display = "none";
+                    document.getElementById("enquiryMessage").value = "";
+                }, 2000);
             }
             progressBar.style.width = progress + '%';
         }, 200); // update every 200ms
