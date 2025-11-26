@@ -11,6 +11,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
+    <script src="https://unpkg.com/cursor-effects@latest/dist/browser.js"></script>
+
     <script type="text/javascript"
         src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
     </script>
@@ -27,6 +29,24 @@
 <body>
     <div class="page-scale">   
     <div class="top-gradient"></div>
+
+    <div class="background-slider">
+        <div class="track track1">
+            <div class="slide" style="background-image: url('background1.jpg');"></div>
+            <div class="slide" style="background-image: url('background2.jpg');"></div>
+            <div class="slide" style="background-image: url('background3.jpg');"></div>
+        </div>
+
+        <div class="track track2">
+            <div class="slide" style="background-image: url('background1.jpg');"></div>
+            <div class="slide" style="background-image: url('background2.jpg');"></div>
+            <div class="slide" style="background-image: url('background3.jpg');"></div>
+        </div>
+    </div>
+
+    <div class="darken-bg"></div>
+
+    <div id="cursor"></div>
 
 
     <div class="top-bar">
@@ -68,15 +88,9 @@
 
             <div class="input-group">
                 <label for="schoolSelect">School:</label>
-                <select id="schoolSelect" style="font-size:16px;" required>
-                    <option value="" disabled selected hidden>Select your school</option>
-                    <option value="JIS">Jakarta Intercultural School</option>
-                    <option value="SIS">Singapore International School</option>
-                    <option value="UWC">UWCSEA</option>
-                    <option value="Dulwich">Dulwich College</option>
-                    <option value="Other">Other</option>
-                </select>
+                <input type="text" id="schoolSelect" placeholder="Your school" required>
             </div>
+
 
             <div class="input-group">
                 <label for="categorySelect">Category:</label>
@@ -150,6 +164,8 @@
             </div>
         </div>
     </div>
+
+
     
 
 

@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     const loadingOverlay2 = document.getElementById('loadingOverlay2');
-    const loadingOverlay4 = document.getElementById('loadingOverlay4');
+
 
     const viewResult = document.getElementById('button1'); // View Result
     const downloadCert = document.getElementById('button2'); // download cert.
@@ -67,7 +67,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const headerMessage = document.getElementById('headerMessage');
         headerMessage.textContent = "Check Your Result!";
         emailBox.style.display = 'flex';
-        emailInput.value = ''; // Clear previous input
     });
     closeBox.addEventListener('click', function() {
         emailBox.style.display = 'none';
@@ -79,12 +78,25 @@ document.addEventListener('DOMContentLoaded', function() {
         const headerMessage = document.getElementById('headerMessage');
         headerMessage.textContent = "Download Your Certificate!";
         emailBox.style.display = 'flex';
-        emailInput.value = ''; // Clear previous input
-    });
-    closeBox2.addEventListener('click', function() {
-        emailBox.style.display = 'none';
+
     });
 
+    // show overlay + spinner with fade-in
+    function showSpinner() {
+        loadingOverlay2.style.display = 'flex';
+        const spinner = loadingOverlay2.querySelector('.spinner');
+        spinner.style.display = 'flex'; 
+        requestAnimationFrame(() => {
+            loadingOverlay2.classList.add('active'); // smooth fade in
+        });
+    }
+
+    // hide spinner but KEEP background
+    function hideSpinnerKeepBackground() {
+        const spinner = loadingOverlay2.querySelector('.spinner');
+        spinner.style.display = 'none'; // spinner disappears instantly
+        // do NOT remove 'active' — background stays at rgba(0,0,0,0.25)
+    }
 
     /* CHECK RESULT SUBMIT BUTTON */
     submitEmail.addEventListener('click', function() {
@@ -96,50 +108,58 @@ document.addEventListener('DOMContentLoaded', function() {
             const categorySelect = document.getElementById('categorySelect');
             const selectedCategory = categorySelect.value;
             if (!firstName) {
-                loadingOverlay2.classList.add('active');
+                showSpinner();
                 setTimeout(() => {
+                    hideSpinnerKeepBackground();
+                    loadingOverlay2.style.display = 'none';
                     errorBox.style.display = 'flex';
                     errorText.textContent = "Please enter your first name.";
-                    loadingOverlay2.classList.remove('active');
                 }, 2000);
                 closeErrorBox.addEventListener('click', function() {
                     errorBox.style.display = 'none';
+                    loadingOverlay2.classList.remove('active');
                 });
                 return;
             }
             if (!lastName) {
-                loadingOverlay2.classList.add('active');
+                showSpinner();
                 setTimeout(() => {
+                    hideSpinnerKeepBackground();
+                    loadingOverlay2.style.display = 'none';
                     errorBox.style.display = 'flex';
                     errorText.textContent = "Please enter your last name.";
-                    loadingOverlay2.classList.remove('active');
                 }, 2000);
                 closeErrorBox.addEventListener('click', function() {
                     errorBox.style.display = 'none';
+                    loadingOverlay2.classList.remove('active');
                 });
                 return;
             }
             if (!dob && !email) {
-                loadingOverlay2.classList.add('active');
+                showSpinner();
                 setTimeout(() => {
+                    hideSpinnerKeepBackground();
+                    loadingOverlay2.style.display = 'none';
                     errorBox.style.display = 'flex';
-                    errorText.textContent = "Please enter your birth date or email address.";
-                    loadingOverlay2.classList.remove('active');
+                    errorText.textContent = "Please enter your birth date or email.";
                 }, 2000);
                 closeErrorBox.addEventListener('click', function() {
                     errorBox.style.display = 'none';
+                    loadingOverlay2.classList.remove('active');
                 });
                 return;
             }
             if(!selectedCategory) {
-                loadingOverlay2.classList.add('active');
+                showSpinner();
                 setTimeout(() => {
+                    hideSpinnerKeepBackground();
+                    loadingOverlay2.style.display = 'none';
                     errorBox.style.display = 'flex';
                     errorText.textContent = "Please select a category.";
-                    loadingOverlay2.classList.remove('active');
                 }, 2000);
                 closeErrorBox.addEventListener('click', function() {
                     errorBox.style.display = 'none';
+                    loadingOverlay2.classList.remove('active');
                 });
                 return;
             }
@@ -166,15 +186,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     emailBox.style.display = 'none';
                 });
             } else {
-                loadingOverlay2.classList.add('active');
+                showSpinner();
                 setTimeout(() => {
+                    hideSpinnerKeepBackground();
+                    loadingOverlay2.style.display = 'none';
                     errorBox.style.display = 'flex';
                     errorText.textContent = "Unable to find contestant.";
-                    loadingOverlay2.classList.remove('active');
                 }, 2000);
                 closeErrorBox.addEventListener('click', function() {
                     errorBox.style.display = 'none';
+                    loadingOverlay2.classList.remove('active');
                 });
+                return;
             }
         } else {
             const firstName = capitalize(document.getElementById('firstNameInput').value.trim());
@@ -184,50 +207,58 @@ document.addEventListener('DOMContentLoaded', function() {
             const categorySelect = document.getElementById('categorySelect');
             const selectedCategory = categorySelect.value;
             if (!firstName) {
-                loadingOverlay2.classList.add('active');
+                showSpinner();
                 setTimeout(() => {
+                    hideSpinnerKeepBackground();
+                    loadingOverlay2.style.display = 'none';
                     errorBox.style.display = 'flex';
                     errorText.textContent = "Please enter your first name.";
-                    loadingOverlay2.classList.remove('active');
                 }, 2000);
                 closeErrorBox.addEventListener('click', function() {
                     errorBox.style.display = 'none';
+                    loadingOverlay2.classList.remove('active');
                 });
                 return;
             }
             if (!lastName) {
-                loadingOverlay2.classList.add('active');
+                showSpinner();
                 setTimeout(() => {
+                    hideSpinnerKeepBackground();
+                    loadingOverlay2.style.display = 'none';
                     errorBox.style.display = 'flex';
                     errorText.textContent = "Please enter your last name.";
-                    loadingOverlay2.classList.remove('active');
                 }, 2000);
                 closeErrorBox.addEventListener('click', function() {
                     errorBox.style.display = 'none';
+                    loadingOverlay2.classList.remove('active');
                 });
                 return;
             }
             if (!dob && !email) {
-                loadingOverlay2.classList.add('active');
+                showSpinner();
                 setTimeout(() => {
+                    hideSpinnerKeepBackground();
+                    loadingOverlay2.style.display = 'none';
                     errorBox.style.display = 'flex';
-                    errorText.textContent = "Please enter your birth date or email address.";
-                    loadingOverlay2.classList.remove('active');
+                    errorText.textContent = "Please enter your birth date or email.";
                 }, 2000);
                 closeErrorBox.addEventListener('click', function() {
                     errorBox.style.display = 'none';
+                    loadingOverlay2.classList.remove('active');
                 });
                 return;
             }
             if(!selectedCategory) {
-                loadingOverlay2.classList.add('active');
+                showSpinner();
                 setTimeout(() => {
+                    hideSpinnerKeepBackground();
+                    loadingOverlay2.style.display = 'none';
                     errorBox.style.display = 'flex';
                     errorText.textContent = "Please select a category.";
-                    loadingOverlay2.classList.remove('active');
                 }, 2000);
                 closeErrorBox.addEventListener('click', function() {
                     errorBox.style.display = 'none';
+                    loadingOverlay2.classList.remove('active');
                 });
                 return;
             }
@@ -243,15 +274,18 @@ document.addEventListener('DOMContentLoaded', function() {
             if (user && user.certificate) {
                 downloadCertificate(user);
             } else {
-                loadingOverlay2.classList.add('active');
+                showSpinner();
                 setTimeout(() => {
+                    hideSpinnerKeepBackground();
+                    loadingOverlay2.style.display = 'none';
                     errorBox.style.display = 'flex';
                     errorText.textContent = "Certificate has not released yet.";
-                    loadingOverlay2.classList.remove('active');
                 }, 2000);
                 closeErrorBox.addEventListener('click', function() {
                     errorBox.style.display = 'none';
+                    loadingOverlay2.classList.remove('active');
                 });
+                return;
             }
 
         }
@@ -308,6 +342,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!name) return '';
         return name.toLowerCase().replace(/\b\w/g, char => char.toUpperCase());
     }
+
+
+    
 
     document.getElementById("openCertLink").addEventListener("click", function(event) {
         const loadingOverlay3 = document.getElementById('loadingOverlay3');
@@ -400,6 +437,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const modal = document.getElementById("errorModal");
         if (event.target === modal) {
             modal.style.display = "none";
+            loadingOverlay2.classList.remove('active');
         }
     });
     window.addEventListener("click", function(event) {

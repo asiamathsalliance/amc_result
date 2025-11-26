@@ -2,6 +2,22 @@
     font-family: Arial, Helvetica, sans-serif !important
 }
 
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.darken-bg {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.2); /* your requested darkness */
+    z-index: -1; /* above images, below your real content */
+    pointer-events: none; /* won't block buttons */
+}
+
 body {
     position: relative;
     margin: 0;
@@ -12,9 +28,56 @@ body {
     overflow: hidden;           
 }
 
-#enquiryMessage {
-  resize: none;
+form input,
+form textarea,
+form select,
+.modal input,
+.modal textarea,
+.modal select {
+    border-radius: 3px !important; /* force it */
 }
+
+.background-slider {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    z-index: -2;
+}
+
+/* Each track = 3 slides × 100vw = 300vw */
+.track {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    width: 300vw;
+    height: 100vh;
+    animation: slide 150s linear infinite;
+}
+
+/* Track 2 starts to the right of track 1 */
+.track2 {
+    left: 300vw;
+}
+.slide {
+    flex: 0 0 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+@keyframes slide {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-300vw);
+    }
+}
+
+
+
+
 
 
 body::before {
@@ -24,13 +87,7 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: 
-        linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), /* dark overlay */
-        url('background-web.jpg');
-  background-size: cover;       /* fill the screen */
-  background-position: center;  /* center it */
-  background-repeat: no-repeat;          /* blur the background */
-  background-attachment: fixed;
+
   z-index: -1;                  /* behind content */
 }
 
@@ -91,7 +148,7 @@ button {
 
 button:hover {
   background-color: #c16a00;
-  transform: scale(1.08);
+  transform: scale(1.1);
 }
 
 
@@ -208,7 +265,7 @@ button:hover {
 }
 #submitEmail:hover {
   background-color: #555;
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
 #closeBox {
@@ -217,9 +274,8 @@ button:hover {
   color: white;
 }
 #closeBox:hover {
-  
   background-color: #555;
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
 #submitCertEmail {
@@ -229,7 +285,7 @@ button:hover {
 }
 #submitCertEmail:hover {
   background-color: #555;
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
 #closeCert {
@@ -240,7 +296,7 @@ button:hover {
 
 #closeCert:hover {
   background-color: #555;
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
 #overlayText {
@@ -289,7 +345,24 @@ input::placeholder {
 }
 
 #loadingOverlay2 {
-  background-color: rgba(0,0,0,0.25); /* darker background */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.25); /* start transparent */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+
+
+#loadingOverlay2.active {
+    opacity: 1;
 }
 
 #loadingOverlay3 {
@@ -324,8 +397,7 @@ input {
   font-size: 16px;
   color: black;
   padding: 10px;
-  border-radius: 0px;
-  border: 1px solid #ccc;
+  border: 0px solid #ccc;
 }
 
 
@@ -416,6 +488,7 @@ input[type="date"]::placeholder {
 }
 
 
+
 .name-field input, .dob-field input {
     width: 100%;
     height: 40px;
@@ -433,7 +506,7 @@ input[type="date"]::placeholder {
     font-size: 16px;
     padding: 6px 8px;
     border-radius: 0px;
-    border: 1px solid #ccc;
+    border: 0px solid #ccc;
 }
 
 input:focus {
@@ -569,6 +642,8 @@ dobInput::-webkit-datetime-edit {
     color: #000;
 }
 
+
+
 #errorModal .modal-content {
   width: 26%;          /* can adjust width */
   max-width: 400px;
@@ -576,7 +651,7 @@ dobInput::-webkit-datetime-edit {
   padding: 30px;
   border-radius: 5px;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 12px rgba(0,0,0,0);
   font-family: Verdana, Geneva, sans-serif;
   background-color: #ffffff;  /* light red for error */           /* dark red text */
   position: relative;          /* for future X button */
@@ -600,7 +675,7 @@ dobInput::-webkit-datetime-edit {
 
 .close:hover {
   color: #333;
-  transform: scale(1.1);
+  transform: scale(1.2);
 }
 
 .error-content {
@@ -645,7 +720,7 @@ dobInput::-webkit-datetime-edit {
   color: #999;
   cursor: pointer;
   transition: color 0.2s;
-  transform: transform 0.2s ease;
+  transform: transform 1s ease;
 }
 
 .close-result:hover {
@@ -777,7 +852,7 @@ dobInput::-webkit-datetime-edit {
 }
 
 .nav-item:hover {
-  transform: scale(1.1); /* increase size by 10% */
+  transform: scale(1.15); /* increase size by 10% */
   opacity: 0.9; /* slightly fade for effect */
 }
 
@@ -884,7 +959,7 @@ textarea::placeholder {
 
 #enquiryModal .modal-content button:hover {
   background-color: #555;
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
 /* Close button for enquiry modal */
@@ -910,6 +985,72 @@ textarea::placeholder {
     font-weight: 500;
     color: #999; /* gray placeholder color */
 }
+form input,
+form textarea,
+form select {
+    margin: 0;
+    border-radius: 3px;
+    border: 1px solid #ccc;          /* default light border */
+    padding: 8px 12px;
+    outline: none;                 /* remove normal outline */
+    box-shadow: none;               
+    background-color: #fff;
+    box-sizing: border-box;          /* ensure border doesn't affect size */
+    transition: border-color 0.2s ease;
+    -webkit-appearance: none;        /* remove browser inner styling (Chrome/Safari) */
+    -moz-appearance: none;           /* remove Firefox styling */
+    appearance: none;                /* standard */
+}
+
+#cursor {
+    position: fixed;
+    top: 0; left: 0;
+    width: 12px; height: 12px;
+    background: rgba(0,0,0,0.7);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease, background 0.2s ease;
+    z-index: 9999;
+}
+
+#enquiryModal textarea {
+  resize: none;
+}
+/* Hover & Focus: subtle dark outline */
+form input:hover,
+form textarea:hover,
+form select:hover,
+form input:focus,
+form textarea:focus,
+form select:focus { 
+    border: 1px solid #333 !important;
+    outline: none !important;
+    
+}
+
+#emailBox input,
+#emailBox select,
+#emailBox textarea {
+  margin: 0;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease; /* smooth hover/focus */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+#emailBox input:hover,
+#emailBox input:focus,
+#emailBox select:hover,
+#emailBox select:focus {
+    border: 1px solid #333 !important;
+    outline: none !important;
+}
+
+
+
+
 
 
 
@@ -997,3 +1138,8 @@ textarea::placeholder {
     border-radius: 1px;
     transition: width 0.2s ease;
 }
+
+
+
+
+
