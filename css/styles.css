@@ -1,5 +1,5 @@
 * {
-    font-family: Arial, Helvetica, sans-serif !important
+    font-family:Arial, Helvetica, sans-serif !important;
 }
 
 html, body {
@@ -13,7 +13,7 @@ html, body {
 .darken-bg {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.4); /* your requested darkness */
+    background: rgba(0, 0, 0, 0.5); /* your requested darkness */
     z-index: -1; /* above images, below your real content */
     pointer-events: none; /* won't block buttons */
 }
@@ -92,15 +92,17 @@ body::before {
 }
 
 #button1 {
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* subtle shadow */
-  width: 220px;
-  padding: 24px 28px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5); /* subtle shadow */
+  width: 200px;
+  padding: 22px 26px;
+  font-size: 20px !important;
 }
 
 #button2 {
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* subtle shadow */
-  width: 330px;
-  padding: 24px 28px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5); /* subtle shadow */
+  width: 294px;
+  padding: 22px 26px;
+  font-size: 20px !important;
 }
 .top-logo {
     height: 50px;        /* adjust as needed */
@@ -848,7 +850,7 @@ dobInput::-webkit-datetime-edit {
 
 .nav-item {
   font-family: Arial, sans-serif;
-  font-weight: 600;
+  font-weight: bold;
   font-size: 22px;
   display: inline-block;
   color: white;
@@ -938,7 +940,7 @@ textarea::placeholder {
 }
 
 .enquiry-subtext {
-    font-size: 14px;
+    font-size: 15px;
     color: #000000;        /* soft dark grey */
     margin-top: -10px;  /* pull slightly closer to header */
     margin-bottom: 10px;
@@ -987,7 +989,6 @@ textarea::placeholder {
 
 #enquiryMessage::placeholder {
     font-size: 16px;
-    font-weight: 500;
     color: #999; /* gray placeholder color */
 }
 form input,
@@ -1232,7 +1233,7 @@ form select:focus {
 
 .home-content h1, .home-content p {
     color: white;
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
 }
 
 .home-content h1 {
@@ -1240,6 +1241,7 @@ form select:focus {
     margin-bottom: 10px;
 }
 .home-content p {
+    font-family: 'Roboto', sans-serif !important;
     font-size: 18px;
     line-height: 1.5;
 
@@ -1251,6 +1253,7 @@ form select:focus {
     margin: 10px 0 20px 0;    /* spacing above/below */
     border-radius: 1px;       /* soften ends */
     margin-bottom: 30px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.25);
 }
 
 .home-button {
@@ -1355,8 +1358,7 @@ section.visible {
 .amc-text h1 {
     font-size: 2.5rem;
     margin-bottom: 10px;
-    font-family: 'Sebino Regular', sans-serif;
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.7); /* text shadow */
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5); /* text shadow */
     position: relative;
 }
 
@@ -1366,16 +1368,18 @@ section.visible {
     width: 60px;               /* adjust line length */
     height: 3px;               /* line thickness */
     background-color: #ff9100; /* orange line */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.25);
     margin-top: 8px;           /* space from header */
     border-radius: 2px;
 }
 
+
 .amc-text .amc-description, .amc-text .amc-dates {
     font-size: 1.1rem;
     margin-top: 25px;
-    font-family: 'Ak Sans Regular', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     line-height: 1.5;
-    text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     margin-bottom: 0px;
 }
 
