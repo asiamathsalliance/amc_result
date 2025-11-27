@@ -92,11 +92,13 @@ body::before {
 }
 
 #button1 {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* subtle shadow */
   width: 220px;
   padding: 24px 28px;
 }
 
 #button2 {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* subtle shadow */
   width: 330px;
   padding: 24px 28px;
 }
@@ -261,6 +263,7 @@ button:hover {
 #submitEmail {
   transition: background-color 0.4s ease, transform 0.3s ease;
   background-color: #333;
+  
   color: white;
 }
 #submitEmail:hover {
@@ -1280,7 +1283,7 @@ form select:focus {
 .home-button:hover {
     background: #ff9100;
     color: white;
-    transform: scale(1) !important;
+    transform: scale(1.05) !important;
 }
 
 section {
