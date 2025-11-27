@@ -818,7 +818,7 @@ dobInput::-webkit-datetime-edit {
   left: 0;
   width: 100%;
   height: 150px;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 1), transparent);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent);
   z-index: 1;
 }
 
