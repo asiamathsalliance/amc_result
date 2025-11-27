@@ -322,6 +322,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     origin: { y: 0.55 },
                     ticks: 350
                 });
+
+                // Move the canvas above modal
+                const canvas = document.querySelector('canvas');
+                if (canvas) {
+                    canvas.style.position = 'fixed';
+                    canvas.style.top = '0';
+                    canvas.style.left = '0';
+                    canvas.style.zIndex = '10000';  // above modal
+                    canvas.style.pointerEvents = 'none'; // allow clicks through canvas
+                }
             }, 100);
             
         } else {
@@ -331,8 +341,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     particleCount: 300,
                     spread: 300,
                     origin: { y: 0.55 },
-                    ticks: 200
+                    ticks: 350
                 });
+
+                // Move the canvas above modal
+                const canvas = document.querySelector('canvas');
+                if (canvas) {
+                    canvas.style.position = 'fixed';
+                    canvas.style.top = '0';
+                    canvas.style.left = '0';
+                    canvas.style.zIndex = '10000';  // above modal
+                    canvas.style.pointerEvents = 'none'; // allow clicks through canvas
+                }
             }, 100);
         }   
         modal.style.display = 'flex';
@@ -382,12 +402,6 @@ document.addEventListener('DOMContentLoaded', function() {
             return `${parts[2]}-${parts[1].padStart(2,'0')}-${parts[0].padStart(2,'0')}`;
         }
     }
-
-    /* OPEN THE CONTACT US PAGE  */
-    const contactText = document.querySelector(".nav-item:nth-child(2)");
-    contactText.addEventListener("click", function() {
-        document.getElementById("enquiryModal").style.display = "block";
-    });
 
     /* FUNCTION TO SEND ENQUIRY EMAILJS AUTOMATIC */
     function sendEnquiryEmail() {
@@ -517,6 +531,70 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 200); // update every 200ms
     }
 
+    /* SWITCHING NAVIGATION BARS */
+    document.querySelectorAll('.nav-item').forEach(item => {
+        if (item.classList.contains('contact-nav')) return;
 
+        item.addEventListener('click', () => {
+            const targetId = item.getAttribute('data-target');
+            const targetSection = document.getElementById(targetId);
+
+            document.querySelectorAll('section').forEach(sec => {
+                if (sec === targetSection) return;
+                sec.classList.remove('visible'); // fade out others
+            });
+
+            targetSection.classList.add('visible'); // fade in target
+        });
+    });
+
+    /* SETTING WHICH NAV-ITEM IS ACTIVE (UNDERLINED) */
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(item => {
+        item.addEventListener('click', () => {
+            // Skip if this is the contact nav
+            if (item.classList.contains('contact-nav')) return;
+
+            // Remove active from all other nav-items (excluding contact)
+            navItems.forEach(nav => {
+                if (!nav.classList.contains('contact-nav')) {
+                    nav.classList.remove('active');
+                }
+            });
+
+            // Add active only to clicked item
+            item.classList.add('active');
+        });
+    });
+
+    const homeButton = document.querySelector('.home-button');
+
+    homeButton.addEventListener('click', () => {
+        const targetId = 'amcSection';
+        const targetSection = document.getElementById(targetId);
+
+        // Hide all other sections
+        document.querySelectorAll('section').forEach(sec => {
+            if (sec !== targetSection) sec.classList.remove('visible');
+        });
+
+        // Show target section
+        targetSection.classList.add('visible');
+
+        // Update nav underline (exclude contact)
+        navItems.forEach(nav => {
+            if (!nav.classList.contains('contact-nav')) nav.classList.remove('active');
+        });
+        const amcNav = document.querySelector('.nav-item[data-target="amcSection"]');
+        if (amcNav) amcNav.classList.add('active');
+    });
+
+
+
+
+
+
+
+    
     
 });
