@@ -100,7 +100,7 @@ body::before {
 
 #button2 {
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5); /* subtle shadow */
-  width: 294px;
+  width: 280px;
   padding: 22px 26px;
   font-size: 20px !important;
 }
