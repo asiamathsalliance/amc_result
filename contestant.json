@@ -39,6 +39,7 @@
     "dob": "17/07/2009",
     "fullName": "Sarah Sun"
   },
+
   {
     "email": "yuchenwang.bill@outlook.com",
     "result": 79.5,
@@ -48,6 +49,16 @@
     "firstName": "Yuchen",
     "dob": "6/6/2008",
     "fullName": "Yuchen Wang"
+  },
+  {
+    "email": "wsp0598@163.com",
+    "result": 63,
+    "certificate": "",
+    "category": "AMC 10A",
+    "lastName": "Ren",
+    "firstName": "Ho Chak",
+    "dob": "24/02/2010",
+    "fullName": "Ho Chak Ren"
   },
   {
     "email": "wsp0598@163.com",
