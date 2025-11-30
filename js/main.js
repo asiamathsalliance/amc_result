@@ -6,6 +6,18 @@ document.addEventListener('DOMContentLoaded', function() {
         "AMC 12B": 1188.5
     };
 
+    let tempFirstName, tempLastName, tempFullName, tempEmail, tempDob, tempCategory, tempResult, tempCertificate;
+    function resetTempVariables() {
+        tempFirstName = null;
+        tempLastName = null;
+        tempFullName = null;
+        tempEmail = null;
+        tempDob = null;
+        tempCategory = null;
+        tempResult = null;
+        tempCertificate = null;
+    }
+
     const loadingOverlay2 = document.getElementById('loadingOverlay2');
 
 
@@ -45,21 +57,69 @@ document.addEventListener('DOMContentLoaded', function() {
         this.style.color = '#999';
     }
     });
-    let usersData = []; 
-    async function loadUsers() {
+
+
+
+
+
+
+    async function updateStudentInfo(firstName, lastName, dob, email, category) {
+        const data = { firstName, lastName, dob, email, category};
+
         try {
-            const response = await fetch("first data amc.json");
-            usersData = await response.json(); 
-            console.log(usersData); 
-        } catch (error) {
-            console.error("Error fetching JSON:", error);
+            const response = await fetch("https://competition-backend-1aga.onrender.com/check-result", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                const student = result.student;
+
+            // Assign values to the globally declared variables
+                tempFirstName    = student.firstName;
+                tempLastName     = student.lastName;
+                tempFullName     = student.fullName;
+                tempEmail        = student.email;
+                tempDob          = student.dob;
+                tempCategory     = student.category;
+                tempResult       = student.result;
+                tempCertificate  = student.certificate;
+            } else {
+                resetTempVariables();
+                return null;
+            }
+        } catch (err) {
+            showSpinner();
+            setTimeout(() => {
+                hideSpinnerKeepBackground();
+                loadingOverlay2.style.display = 'none';
+                errorBox.style.display = 'flex';
+                errorText.textContent = "Unable to find contestant.";
+            }, 2000);
+            closeErrorBox.addEventListener('click', function() {
+                errorBox.style.display = 'none';
+                loadingOverlay2.classList.remove('active');
+            });
+            return null;
         }
     }
-    window.onload = loadUsers;
-    function getDirectDriveLink(shareLink) {
-        const match = shareLink.match(/\/d\/(.*?)\//);
-        return match ? `https://drive.google.com/uc?export=download&id=${match[1]}` : shareLink;
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     const headerMessage = document.getElementById('headerMessage');
@@ -163,42 +223,58 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
                 return;
             }
+            
+            async function showResult() {
+                try {
+                    resetTempVariables();
+                    showSpinner();
 
-            const user = usersData.find(u =>
-                u.fullName.toLowerCase().includes(firstName.toLowerCase()) &&
-                u.fullName.toLowerCase().includes(lastName.toLowerCase()) &&
-                u.category === selectedCategory &&
-                (normalizeDate(u.dob) === dob ||
-                u.email.toLowerCase() === email.toLowerCase())
-            );        
+                    await updateStudentInfo(firstName, lastName, dob, email, selectedCategory);
 
-            if (user) {
-                loadingOverlay2.classList.add('active');
-                setTimeout(() => {
-                    document.getElementById('emailBox').style.display = 'none';
-                    showResultModal(user, selectedCategory, cutoffScores);
-                    categorySelect.selectedIndex = 0;
-                    categorySelect.style.color = '#999';
-                    loadingOverlay2.classList.remove('active');
-                }, 3000);
-                document.querySelector('.close-result').addEventListener('click', () => {
-                    document.getElementById('resultBox').style.display = 'none';
-                    emailBox.style.display = 'none';
-                });
-            } else {
-                showSpinner();
-                setTimeout(() => {
-                    hideSpinnerKeepBackground();
-                    loadingOverlay2.style.display = 'none';
-                    errorBox.style.display = 'flex';
-                    errorText.textContent = "Unable to find contestant.";
-                }, 2000);
-                closeErrorBox.addEventListener('click', function() {
-                    errorBox.style.display = 'none';
-                    loadingOverlay2.classList.remove('active');
-                });
-                return;
+                    if(tempFirstName === null) {
+                        showSpinner();
+                        setTimeout(() => {
+                            hideSpinnerKeepBackground();
+                            loadingOverlay2.style.display = 'none';
+                            errorBox.style.display = 'flex';
+                            errorText.textContent = "Unable to find contestant.";
+                        }, 2000);
+                        closeErrorBox.addEventListener('click', function() {
+                            errorBox.style.display = 'none';
+                        });
+                        return;
+                    } else {
+                        setTimeout(() => {
+                            hideSpinnerKeepBackground();
+                            loadingOverlay2.style.display = 'none';
+                            document.getElementById('emailBox').style.display = 'none';
+                            showResultModal(tempFirstName, tempLastName, tempResult, tempCategory);
+                            categorySelect.selectedIndex = 0;
+                            categorySelect.style.color = '#999';
+                            
+                        }, 1500);
+                        document.querySelector('.close-result').addEventListener('click', () => {
+                            document.getElementById('resultBox').style.display = 'none';
+                            emailBox.style.display = 'none';
+                        });
+                    }
+
+                } catch (err) {
+                    showSpinner();
+                    setTimeout(() => {
+                        hideSpinnerKeepBackground();
+                        loadingOverlay2.style.display = 'none';
+                        errorBox.style.display = 'flex';
+                        errorText.textContent = "Unable to find contestant.";
+                    }, 2000);
+                    closeErrorBox.addEventListener('click', function() {
+                        errorBox.style.display = 'none';
+                        loadingOverlay2.classList.remove('active');
+                    });
+                    return;
+                } 
             }
+            showResult();
         } else {
             const firstName = capitalize(document.getElementById('firstNameInput').value.trim());
             const lastName = capitalize(document.getElementById('lastNameInput').value.trim());
@@ -263,31 +339,44 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            const user = usersData.find(u =>
-                u.fullName.toLowerCase().includes(firstName.toLowerCase()) &&
-                u.fullName.toLowerCase().includes(lastName.toLowerCase()) &&
-                u.category === selectedCategory &&
-                (normalizeDate(u.dob) === dob ||
-                u.email.toLowerCase() === email.toLowerCase())
-            );  
+            async function download() {
+                try {
+                    resetTempVariables();
+                    loadingOverlay2.classList.add('active');
 
-            if (user && user.certificate) {
-                downloadCertificate(user);
-            } else {
-                showSpinner();
-                setTimeout(() => {
-                    hideSpinnerKeepBackground();
-                    loadingOverlay2.style.display = 'none';
-                    errorBox.style.display = 'flex';
-                    errorText.textContent = "Certificate has not released yet.";
-                }, 2000);
-                closeErrorBox.addEventListener('click', function() {
-                    errorBox.style.display = 'none';
-                    loadingOverlay2.classList.remove('active');
-                });
-                return;
-            }
+                    await updateStudentInfo(firstName, lastName, dob, email, selectedCategory);
 
+                    if(tempCertificate === "" || firstName === null) {
+                        showSpinner();
+                        setTimeout(() => {
+                            hideSpinnerKeepBackground();
+                            loadingOverlay2.style.display = 'none';
+                            errorBox.style.display = 'flex';
+                            errorText.textContent = "Certificate has not released yet.";
+                        }, 2000);
+                        closeErrorBox.addEventListener('click', function() {
+                            errorBox.style.display = 'none';
+                            loadingOverlay2.classList.remove('active');
+                        });
+                    } else {
+                        downloadCertificate();
+                    }
+                } catch (err) {
+                    showSpinner();
+                    setTimeout(() => {
+                        hideSpinnerKeepBackground();
+                        loadingOverlay2.style.display = 'none';
+                        errorBox.style.display = 'flex';
+                        errorText.textContent = "Certificate has not released yet.";
+                    }, 2000);
+                    closeErrorBox.addEventListener('click', function() {
+                        errorBox.style.display = 'none';
+                        loadingOverlay2.classList.remove('active');
+                    });
+                    return;
+                } 
+            };
+            download();
         }
         
     });
@@ -300,7 +389,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
 
     
-    function showResultModal(user, selectedCategories, cutoffScores) {
+    function showResultModal(tempFirstName, tempLastName, tempResult, tempCategory) {
         const modal = document.getElementById('resultBox');
         const name = document.getElementById('resultName');
         const messageText = document.getElementById('resultMessage');
@@ -308,10 +397,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const congratulationMessage = document.getElementById('resultCongratulation');
 
         congratulationMessage.textContent = 'Congratulations for completing AMC!';
-        scoreText.textContent = user.result + ' / 150';
+        scoreText.textContent = tempResult + ' / 150';
 
-        const passed = user.result >= cutoffScores[selectedCategories];
-        name.textContent = capitalize(user.firstName) + " " + capitalize(user.lastName);
+        const passed = false;
+        name.textContent = capitalize(tempFirstName) + " " + capitalize(tempLastName);
 
         if (passed) {
             messageText.textContent = 'Congratulations for qualifying AIME!';
@@ -335,7 +424,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 100);
             
         } else {
-            messageText.textContent = 'Category: ' + selectedCategories + ' 2025';
+            messageText.textContent = 'Category: ' + tempCategory + ' 2025';
             setTimeout(() => {
                 confetti({
                     particleCount: 300,
@@ -367,17 +456,19 @@ document.addEventListener('DOMContentLoaded', function() {
     
 
     document.getElementById("openCertLink").addEventListener("click", function(event) {
-        const loadingOverlay3 = document.getElementById('loadingOverlay3');
-        loadingOverlay3.classList.add('active');
+        showSpinner();
         setTimeout(() => {
             // Close the result box
+            
             event.preventDefault(); // prevent the page from jumping
             document.getElementById("resultBox").style.display = "none";
 
             // Open the certificate box
             headerMessage.textContent = "Download Your Certificate!";
             document.getElementById("emailBox").style.display = "flex";
-            loadingOverlay3.classList.remove('active');
+            hideSpinnerKeepBackground();
+            loadingOverlay2.style.display = 'none';
+            
         }, 1250);
     });
 
@@ -461,8 +552,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+
+
     /* DOWNLOAD CERTIFICATE WITH PROGRESS BAR */
-    function downloadCertificate(user) {
+    function downloadCertificate() {
         downloadOverlay.style.display = 'flex';
         downloadContainer.style.display = 'flex';
         const message = document.getElementById('downloadLabel');
@@ -481,7 +574,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 clearInterval(interval);
 
                 // Trigger download
-                const directLink = getDirectDriveLink(user.certificate);
+                const directLink = getDirectDriveLink(tempCertificate);
                 const link = document.createElement('a');
                 link.href = directLink;
                 link.download = 'Certificate.pdf';

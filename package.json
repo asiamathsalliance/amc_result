@@ -13,8 +13,19 @@
   ],
   "author": "Your Name",
   "license": "MIT",
-  "dependencies": {},
   "devDependencies": {
     "live-server": "^1.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/asiamathsalliance/amc_result.git"
+  },
+  "bugs": {
+    "url": "https://github.com/asiamathsalliance/amc_result/issues"
+  },
+  "homepage": "https://github.com/asiamathsalliance/amc_result#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
   }
 }
