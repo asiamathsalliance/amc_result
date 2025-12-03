@@ -102,17 +102,30 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 
+    function fetchWithTimeout(url, options = {}, timeout = 6000) {
+        return Promise.race([
+            fetch(url, options),
+            new Promise((_, reject) =>
+                setTimeout(() => reject(new Error("timeout")), timeout)
+            )
+        ]);
+    }
 
     // FETCH STUDENT INFO FROM BACKEND RENDER
     async function updateStudentInfo(firstName, lastName, dob, email, category) {
         const data = { firstName, lastName, dob, email, category};
         try {
-            const response = await fetch("https://competition-backend-1aga.onrender.com/check-result", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data)
-            });
+            const response = await fetchWithTimeout(
+                "https://competition-backend-1aga.onrender.com/check-result",
+                {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data)
+                },
+                6000 // timeout after 6 seconds
+            );
             const result = await response.json();
+
             if (result.success) {
                 const student = result.student;
                 tempFirstName    = student.firstName;
@@ -133,8 +146,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 hideSpinnerKeepBackground();
                 loadingOverlay2.style.display = 'none';
                 errorBox.style.display = 'flex';
-                errorText.textContent = "Unable to find contestant.";
-            }, 2000);
+                errorText.textContent = "Server is not responding. Please try again.";
+            }, 500);
             closeErrorBox.addEventListener('click', function() {
                 errorBox.style.display = 'none';
                 loadingOverlay2.classList.remove('active');
