@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 hideSpinnerKeepBackground();
                 loadingOverlay2.style.display = 'none';
                 errorBox.style.display = 'flex';
-                errorText.textContent = "Server is not responding. Please try again.";
+                errorText.textContent = "Server not responding. Please try again.";
             }, 500);
             closeErrorBox.addEventListener('click', function() {
                 errorBox.style.display = 'none';
@@ -262,19 +262,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
 
                 } catch (err) {
-                    showSpinner();
-                    setTimeout(() => {
-                        hideSpinnerKeepBackground();
-                        loadingOverlay2.style.display = 'none';
-                        errorBox.style.display = 'flex';
-                        errorText.textContent = "Unable to find contestant.";
-                    }, 2000);
-                    closeErrorBox.addEventListener('click', function() {
-                        errorBox.style.display = 'none';
-                        loadingOverlay2.classList.remove('active');
-                    });
                     return;
-                } 
+                }
             }
             showResult();
         
