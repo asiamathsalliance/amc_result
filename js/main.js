@@ -141,17 +141,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return null;
             }
         } catch (err) {
-            showSpinner();
-            setTimeout(() => {
-                hideSpinnerKeepBackground();
-                loadingOverlay2.style.display = 'none';
-                errorBox.style.display = 'flex';
-                errorText.textContent = "Server not responding. Please try again.";
-            }, 500);
-            closeErrorBox.addEventListener('click', function() {
-                errorBox.style.display = 'none';
-                loadingOverlay2.classList.remove('active');
-            });
+            errorText.textContent = "Server not responding. Please try again.";
             return null;
         }
     }
@@ -233,7 +223,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     await updateStudentInfo(firstName, lastName, dob, email, selectedCategory);
 
-                    if(tempCategory === null) {
+                    if(errorText.textContent === "Server not responding. Please try again.") {
+                        showSpinner();
+                        setTimeout(() => {
+                            hideSpinnerKeepBackground();
+                            loadingOverlay2.style.display = 'none';
+                            errorBox.style.display = 'flex';
+                            errorText.textContent = "Server not responding. Please try again.";
+                        }, 2000);
+                        closeErrorBox.addEventListener('click', function() {
+                            errorBox.style.display = 'none';
+                        });
+                    } else if (tempCategory === null) {
                         showSpinner();
                         setTimeout(() => {
                             hideSpinnerKeepBackground();
@@ -250,7 +251,9 @@ document.addEventListener('DOMContentLoaded', function() {
                             hideSpinnerKeepBackground();
                             loadingOverlay2.style.display = 'none';
                             document.getElementById('emailBox').style.display = 'none';
+
                             showResultModal(tempFirstName, tempLastName, tempResult, tempCategory);
+
                             categorySelect.selectedIndex = 0;
                             categorySelect.style.color = '#999';
                             
@@ -260,7 +263,6 @@ document.addEventListener('DOMContentLoaded', function() {
                             emailBox.style.display = 'none';
                         });
                     }
-
                 } catch (err) {
                     return;
                 }
@@ -341,7 +343,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     await updateStudentInfo(firstName, lastName, dob, email, selectedCategory);
 
-                    if(tempCertificate === "" || tempCategory === null) {
+                    if(errorText.textContent === "Server not responding. Please try again.") {
+                        showSpinner();
+                        setTimeout(() => {
+                            hideSpinnerKeepBackground();
+                            loadingOverlay2.style.display = 'none';
+                            errorBox.style.display = 'flex';
+                            errorText.textContent = "Server not responding. Please try again.";
+                        }, 2000);
+                        closeErrorBox.addEventListener('click', function() {
+                            errorBox.style.display = 'none';
+                            loadingOverlay2.classList.remove('active');
+                        });
+                    } else if (tempCertificate === "" || tempCategory === null) {
                         showSpinner();
                         setTimeout(() => {
                             hideSpinnerKeepBackground();
@@ -361,17 +375,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         }, 2000);
                     }
                 } catch (err) {
-                    showSpinner();
-                    setTimeout(() => {
-                        hideSpinnerKeepBackground();
-                        loadingOverlay2.style.display = 'none';
-                        errorBox.style.display = 'flex';
-                        errorText.textContent = "Certificate has not released yet.";
-                    }, 2000);
-                    closeErrorBox.addEventListener('click', function() {
-                        errorBox.style.display = 'none';
-                        loadingOverlay2.classList.remove('active');
-                    });
                     return;
                 } 
             };
