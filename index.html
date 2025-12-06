@@ -6,7 +6,7 @@
     <script src="js/main.js"></script>
     <title>AMC 2025 Result</title>
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="icon" type="image/png" href="favicon-final.png">
+    <link rel="icon" type="image/png" id="favicon" href="favicon-final.png">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -48,6 +48,7 @@
             <div class="slide" style="background-image: url('background4.jpg');"></div>
         </div>
     </div>
+
     <div class="top-bar">
         <a href="https://maa.org/student-programs/amc/" target="_blank">
             <img src="logo-amc.png" alt="Logo" class="top-logo">
@@ -59,6 +60,9 @@
             <span class="nav-item contact-nav" onclick="document.getElementById('enquiryModal').style.display='block'">Contact Us</span>
         </div>
     </div>
+
+    <div class="fade-overlay"></div>
+
 
     <!-- HOME SECTION -->
     <section id="homeSection"  class="visible">
@@ -111,6 +115,7 @@
             </div>
         </div>
     </section>
+
 
     <section id="amc8Section" class="hidden">
         <div class ="amc-content">

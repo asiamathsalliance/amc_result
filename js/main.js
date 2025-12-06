@@ -111,6 +111,20 @@ document.addEventListener('DOMContentLoaded', function() {
         ]);
     }
 
+    function keepBackendAwake() {
+        setInterval(() => {
+            fetch("https://competition-backend-1aga.onrender.com/health")
+            .then(res => {
+                if (res.ok) console.log("✅ Backend ping successful");
+                else console.warn("⚠️ Backend ping returned error:", res.status);
+            })
+            .catch(err => console.error("⚠️ Ping failed:", err));
+        }, 5 * 60 * 1000); // 10 minutes
+    }
+
+        // Call it once when page loads
+    keepBackendAwake();
+
     // FETCH STUDENT INFO FROM BACKEND RENDER
     async function updateStudentInfo(firstName, lastName, dob, email, category) {
         const data = { firstName, lastName, dob, email, category};
@@ -284,7 +298,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     hideSpinnerKeepBackground();
                     loadingOverlay2.style.display = 'none';
                     errorBox.style.display = 'flex';
-                    errorText.textContent = "Please enter your first name.";
+                    errorText.textContent = "Please enter your given first name.";
                 }, 2000);
                 closeErrorBox.addEventListener('click', function() {
                     errorBox.style.display = 'none';
@@ -298,7 +312,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     hideSpinnerKeepBackground();
                     loadingOverlay2.style.display = 'none';
                     errorBox.style.display = 'flex';
-                    errorText.textContent = "Please enter your last name.";
+                    errorText.textContent = "Please enter your given last name.";
                 }, 2000);
                 closeErrorBox.addEventListener('click', function() {
                     errorBox.style.display = 'none';
@@ -694,13 +708,5 @@ document.addEventListener('DOMContentLoaded', function() {
         const amcNav = document.querySelector('.nav-item[data-target="amcSection"]');
         if (amcNav) amcNav.classList.add('active');
     });
-
-
-
-
-
-
-
-    
     
 });

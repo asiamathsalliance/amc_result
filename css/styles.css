@@ -398,6 +398,7 @@ input::placeholder {
 }
 
 
+
 input {
   font-family: Verdana, Geneva, sans-serif;
   font-size: 16px;
@@ -652,9 +653,8 @@ dobInput::-webkit-datetime-edit {
 }
 
 
-
 #errorModal .modal-content {
-  width: 26%;          /* can adjust width */
+  width: 30%;          /* can adjust width */
   max-width: 400px;
   min-width: 230px;
   padding: 30px;
@@ -812,6 +812,19 @@ dobInput::-webkit-datetime-edit {
     transform: scale(1.04);
 }
 
+
+#errorText a {
+  color: #007BFF;
+  text-decoration: underline;
+  cursor: pointer;
+  display: inline-block;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+#errorText a:hover {
+  color: #0056b3;
+  transform: scale(1.04);
+}
 
 
 /* Top gradient background */
