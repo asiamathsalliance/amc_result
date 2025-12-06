@@ -229,7 +229,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             hideSpinnerKeepBackground();
                             loadingOverlay2.style.display = 'none';
                             errorBox.style.display = 'flex';
-                            errorText.textContent = "Server not responding. Please try again.";
+                            errorText.textContent = "Server not responding. Please refresh the page.";
                         }, 2000);
                         closeErrorBox.addEventListener('click', function() {
                             errorBox.style.display = 'none';
@@ -349,7 +349,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             hideSpinnerKeepBackground();
                             loadingOverlay2.style.display = 'none';
                             errorBox.style.display = 'flex';
-                            errorText.textContent = "Server not responding. Please try again.";
+                            errorText.textContent = "Server not responding. Please refresh the page.";
                         }, 2000);
                         closeErrorBox.addEventListener('click', function() {
                             errorBox.style.display = 'none';
