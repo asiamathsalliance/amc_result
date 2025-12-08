@@ -1240,7 +1240,7 @@ form select:focus {
 .home-content {
     float: left;
     color: white !important;
-    text-align: left;
+    text-align: justify;
     margin-top: 0%;
     margin-left: 8%;
     margin-right: 10.5%;
@@ -1366,7 +1366,7 @@ section.visible {
 }
 
 .amc-text {
-    text-align: left;           /* text left-aligned */
+    text-align: justify;
     width: auto;                /* expands naturally */
     margin-top: 0%;
     margin-left: 5%;
