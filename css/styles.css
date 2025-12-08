@@ -1237,7 +1237,7 @@ form select:focus {
 }
 
 .amo-image {
-    width: 320px; /* bigger size */
+    width: 310px; /* bigger size */
     height: auto; /* keep aspect ratio */
 }
 
