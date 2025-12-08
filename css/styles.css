@@ -1236,6 +1236,10 @@ form select:focus {
   color: white;
 }
 
+.amo-image {
+    width: 320px; /* bigger size */
+    height: auto; /* keep aspect ratio */
+}
 
 .home-content {
     float: left;
