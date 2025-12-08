@@ -428,7 +428,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const passed = false;
         if(tempFirstName === "" || tempLastName === "") {
-            name.textContent = capitalizeFullName(tempFullName);
+            name.textContent = tempFullName;
         } else {
             name.textContent = capitalize(tempFirstName) + " " + capitalize(tempLastName);
         }
