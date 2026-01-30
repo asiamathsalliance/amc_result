@@ -1,10 +1,16 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const cutoffScores = {
-        "AMC 10A": 1194.5,
-        "AMC 10B": 11105,
-        "AMC 12A": 1176.5,
-        "AMC 12B": 1188.5
-    };
+    const categoriesBtn2 = [
+        "AMC 8"
+    ];
+    const categoriesBtn1 = [
+        "AMC 10A",
+        "AMC 10B",
+        "AMC 12A",
+        "AMC 12B",
+        "AMC 12B Resit"
+    ];
+
+    isAMC8 = false;
 
     let tempFirstName, tempLastName, tempFullName, tempEmail, tempDob, tempCategory, tempResult, tempCertificate;
     function resetTempVariables() {
@@ -16,6 +22,19 @@ document.addEventListener('DOMContentLoaded', function() {
         tempCategory = null;
         tempResult = null;
         tempCertificate = null;
+    }
+
+    function setCategories(categories) {
+        categorySelect.innerHTML = `
+            <option value="" disabled selected hidden>Select your category</option>
+        `;
+
+        categories.forEach(cat => {
+            const option = document.createElement("option");
+            option.value = cat;
+            option.textContent = cat;
+            categorySelect.appendChild(option);
+        });
     }
 
     const loadingOverlay2 = document.getElementById('loadingOverlay2');
@@ -55,9 +74,21 @@ document.addEventListener('DOMContentLoaded', function() {
         return match ? `https://drive.google.com/uc?export=download&id=${match[1]}` : shareLink;
     }
 
+
     const headerMessage = document.getElementById('headerMessage');
     // VIEW RESULT BUTTON
     viewResult.addEventListener('click', function() {
+        isAMC8 = false;
+        const headerMessage = document.getElementById('headerMessage');
+        setCategories(categoriesBtn1);
+        headerMessage.textContent = "Check Your Result!";
+        emailBox.style.display = 'flex';
+    });
+
+    const viewResult8 = document.getElementById('amc8-button1'); // View Result AMC 8
+    viewResult8.addEventListener('click', function() {
+        setCategories(categoriesBtn2);
+        isAMC8 = true;
         const headerMessage = document.getElementById('headerMessage');
         headerMessage.textContent = "Check Your Result!";
         emailBox.style.display = 'flex';
@@ -178,7 +209,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     hideSpinnerKeepBackground();
                     loadingOverlay2.style.display = 'none';
                     errorBox.style.display = 'flex';
-                    errorText.textContent = "Please enter your first name.";
+                    errorText.textContent = "Please enter your given first name.";
                 }, 2000);
                 closeErrorBox.addEventListener('click', function() {
                     errorBox.style.display = 'none';
@@ -192,7 +223,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     hideSpinnerKeepBackground();
                     loadingOverlay2.style.display = 'none';
                     errorBox.style.display = 'flex';
-                    errorText.textContent = "Please enter your last name.";
+                    errorText.textContent = "Please enter your given last name.";
                 }, 2000);
                 closeErrorBox.addEventListener('click', function() {
                     errorBox.style.display = 'none';
@@ -266,7 +297,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             loadingOverlay2.style.display = 'none';
                             document.getElementById('emailBox').style.display = 'none';
 
-                            showResultModal(tempFirstName, tempLastName, tempResult, tempCategory);
+                            showResultModal(tempFirstName, tempLastName, tempResult, tempCategory, isAMC8);
 
                             categorySelect.selectedIndex = 0;
                             categorySelect.style.color = '#999';
@@ -375,7 +406,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             hideSpinnerKeepBackground();
                             loadingOverlay2.style.display = 'none';
                             errorBox.style.display = 'flex';
-                            errorText.textContent = "Certificate has not released yet.";
+                            errorText.textContent = "Certificate has not been released yet.";
                         }, 2000);
                         closeErrorBox.addEventListener('click', function() {
                             errorBox.style.display = 'none';
@@ -416,7 +447,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
 
     // SHOW RESULT / 150 MODAL
-    function showResultModal(tempFirstName, tempLastName, tempResult, tempCategory) {
+    function showResultModal(tempFirstName, tempLastName, tempResult, tempCategory, isAMC8) {
         const modal = document.getElementById('resultBox');
         const name = document.getElementById('resultName');
         const messageText = document.getElementById('resultMessage');
@@ -424,7 +455,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const congratulationMessage = document.getElementById('resultCongratulation');
 
         congratulationMessage.textContent = 'Congratulations for completing AMC!';
-        scoreText.textContent = tempResult + ' / 150';
+        if(isAMC8 == true) {
+            scoreText.textContent = tempResult + ' / 25';
+        } else {
+            scoreText.textContent = tempResult + ' / 150';
+        }
 
         const passed = false;
         if(tempFirstName === "" || tempLastName === "") {
@@ -455,7 +490,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 100);
             
         } else {
-            messageText.textContent = 'Category: ' + tempCategory + ' 2025';
+            if(isAMC8 == true) {
+                messageText.textContent = 'Category: ' + tempCategory + ' 2026';
+            } else {
+                messageText.textContent = 'Category: ' + tempCategory + ' 2025';
+            }
             setTimeout(() => {
                 confetti({
                     particleCount: 250,
@@ -524,7 +563,7 @@ document.addEventListener('DOMContentLoaded', function() {
             category: document.getElementById("enquiryCategory").value,
             message: document.getElementById("enquiryMessage").value
         };
-        emailjs.send("service_btpe0sq", "template_hkzn2pc", parms);
+        emailjs.send("service_8pruku7", "template_hkzn2pc", parms);
         event.preventDefault();
         
     }
@@ -690,7 +729,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const homeButton = document.querySelector('.home-button');
 
     homeButton.addEventListener('click', () => {
-        const targetId = 'amcSection';
+        const targetId = 'amc8Section';
         const targetSection = document.getElementById(targetId);
 
         // Hide all other sections
@@ -705,7 +744,7 @@ document.addEventListener('DOMContentLoaded', function() {
         navItems.forEach(nav => {
             if (!nav.classList.contains('contact-nav')) nav.classList.remove('active');
         });
-        const amcNav = document.querySelector('.nav-item[data-target="amcSection"]');
+        const amcNav = document.querySelector('.nav-item[data-target="amc8Section"]');
         if (amcNav) amcNav.classList.add('active');
     });
     

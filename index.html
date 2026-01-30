@@ -6,6 +6,14 @@
     <script src="js/main.js"></script>
     <title>AMC 2025 Result</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <link rel="icon" type="image/png" id="favicon" href="favicon-final.png">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
@@ -79,7 +87,7 @@
                 </p>
 
             </div>
-            <button class="home-button">AMC 10/12 2025 Result</button>
+            <button class="home-button">AMC 8 2026 Result</button>
 
 
 
@@ -88,11 +96,6 @@
 
     <!-- AMC 10/12 SECTION -->
     <section id="amcSection" class="hidden">
-
-        <div id="cursor"></div>
-
-        
-
         <div class="amc-content">
             <div class="amc-text" style="display: flex; align-items: flex-start; gap: 30px;">
                 <div class ="text-block">
@@ -100,12 +103,9 @@
                     <p class="amc-description">
                         The AMC 10/12 is a 25-question, 75-minute multiple-choice competition designed for students in Grade 10/12 and below. 
                         It covers mathematical topics such as elementary algebra, basic geometry, elementary number theory, and introductory probability. 
-                        The AMC offers two versions of the exam each year: the A competition and the B competition.
                     </p>
                     <p class="amc-dates">
                         Please see below to access your results in the AMC 10/12 2025. <br>
-                        Update: Question 25 of the AMC 12A 2025 contained an error and had no correct answer. All participants have been awarded 6 points for this question.
-
                     </p>
                 </div>
                 <div class="image-block">
@@ -122,24 +122,29 @@
 
 
     <section id="amc8Section" class="hidden">
-        <div class ="amc-content">
-            <div class="amc-text">
-                <h1>AMC 8 2026</h1>
-                <p class="amc-description">
-                    The AMC 8 contest for 2026 has not occurred yet. Please check back later around February 2026 for updates.
-                </p>
+        <div class="amc-content">
+            <div class="amc-text amc8" style="display: flex; align-items: flex-start; gap: 30px;">
+                <div class ="text-block">
+                    <h1>AMC 8 2026</h1>
+                    <p class="amc-description">
+                        The AMC 8 is a 25-question, 40-minute math contest for students in grade 8 and below, focusing on middle school topics like counting, probability, geometry, proportions, graphs, and basic algebra.
+                    </p>
+                    <p class="amc-dates">
+                        Please see below to access your results in the AMC 8 2026. <br>
+
+                    </p>
+                </div>
+                <div class="image-block">
+                    <img src="woodenfigure1.png" alt="AMO Image" class="amo-image">
+                </div>
+            </div>
+
+            <div class="button-container">
+                <button id="amc8-button1">View Result</button>
+                <button id="amc8-button2">Download Certificate</button>
             </div>
         </div>
     </section>
-
-
-
-
-
-
-
-
-
 
 
     <div id="enquiryModal" class="modal">
@@ -163,6 +168,7 @@
                         <option value="AMC 12A">AMC 12A</option>
                         <option value="AMC 12B">AMC 12B</option>
                         <option value="AMC 12B Resit">AMC 12B Resit</option>
+                        <option value="AMC 8">AMC 8</option>
                     </select>
                     
 
@@ -234,7 +240,7 @@
                 <h2 id="resultHeader">Result</h2>
                 <div id="resultMessage"></div>
                 <div class="score-section">
-                    <p id="resultText" style="font-size: 65px; font-weight: bold; font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif"></p>
+                    <p id="resultText" style="font-size: 65px; font-weight: bold"></p>
                     <div class="resultInfo">
                         <h2 id="resultName"></h2>
                         <h2 id="resultCongratulation"></h2>

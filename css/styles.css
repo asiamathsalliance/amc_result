@@ -1,7 +1,3 @@
-* {
-    font-family:Arial, Helvetica, sans-serif !important;
-}
-
 html, body {
     margin: 0;
     padding: 0;
@@ -16,6 +12,14 @@ html, body {
     background: rgba(0, 0, 0, 0.5); /* your requested darkness */
     z-index: -1; /* above images, below your real content */
     pointer-events: none; /* won't block buttons */
+}
+
+h1 {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+* {
+  font-family: 'Source Sans 3', system-ui, sans-serif;
 }
 
 body {
@@ -91,19 +95,27 @@ body::before {
   z-index: -1;                  /* behind content */
 }
 
-#button1 {
+#amc8-button1, #button1 {
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5); /* subtle shadow */
   width: 200px;
   padding: 22px 26px;
-  font-size: 20px !important;
+  font-size: 22px !important;
+  font-weight: 600;
 }
 
-#button2 {
+#amc8-button2, #button2 {
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5); /* subtle shadow */
   width: 280px;
   padding: 22px 26px;
-  font-size: 20px !important;
+  font-size: 22px !important;
+  font-weight: 600;
 }
+
+#amc-remark {
+  font-size: 14px;
+}
+
+
 .top-logo {
     height: 50px;        /* adjust as needed */
     margin-right: 20px;  /* space between logo and nav items */
@@ -142,18 +154,22 @@ button {
   color: white;
   border: none;
   padding: 20px 40px;
-  border-radius: 6px;
+  border-radius: 0px;
   font-size: 24px;
   cursor: pointer;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: 'Source Sans 3', system-ui, sans-serif;
   transition: background-color 0.4s ease, transform 0.3s ease;
 }
 
 
 button:hover {
   background-color: #c16a00;
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
+
+
+
+
 
 
 
@@ -176,7 +192,7 @@ button:hover {
   padding: 40px 45px;
   border-radius: 5px;
   text-align: center;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: 'Source Sans 3', system-ui, sans-serif;
   font-size: 18px;
   min-width: 500px;
   max-width: 90%;
@@ -199,7 +215,7 @@ button:hover {
   border-radius: 5px;
   border: 1px solid #ccc;
   box-sizing: border-box;
-  font-family: Verdana, sans-serif;
+  font-family: 'Source Sans 3', system-ui, sans-serif;
 }
 .modal-content select {
   width: 85%;
@@ -208,7 +224,7 @@ button:hover {
   border-radius: 5px;
   color: #999;
   border: 1px solid #ccc;
-  font-family: Verdana, sans-serif;
+  font-family: 'Source Sans 3', system-ui, sans-serif;
   background-color: white;
 
   /* remove system arrow */
@@ -341,7 +357,7 @@ input::placeholder {
   background-color: rgba(0,0,0,0.55);
   color: white;
   font-size: 30px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: 'Source Sans 3', system-ui, sans-serif;
   text-align: center;
   justify-content: center;
   align-items: center;
@@ -400,7 +416,7 @@ input::placeholder {
 
 
 input {
-  font-family: Verdana, Geneva, sans-serif;
+  font-family: 'Source Sans 3', system-ui, sans-serif;
   font-size: 16px;
   color: black;
   padding: 10px;
@@ -472,7 +488,7 @@ input[type="date"]::placeholder {
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 0px;
-    font-family: inherit;
+    font-family: 'Source Sans 3', system-ui, sans-serif;
     box-sizing: border-box;
     margin-bottom: 3px;
 }
@@ -571,7 +587,7 @@ input:focus {
     border: 1px solid #ccc;
     border-radius: 0px;     /* square-ish */
     box-sizing: border-box;          /* remove extra top margin */
-    font-family: inherit;
+    font-family: 'Source Sans 3', system-ui, sans-serif;
 }
 #certBox .input-group {
     width: 100%;
@@ -661,7 +677,7 @@ dobInput::-webkit-datetime-edit {
   border-radius: 5px;
   text-align: center;
   box-shadow: 0 4px 12px rgba(0,0,0,0);
-  font-family: Verdana, Geneva, sans-serif;
+  font-family: 'Source Sans 3', system-ui, sans-serif;
   background-color: #ffffff;  /* light red for error */           /* dark red text */
   position: relative;          /* for future X button */
 }
@@ -707,7 +723,7 @@ dobInput::-webkit-datetime-edit {
 }
 
 #resultText {
-    font-family:Arial, Helvetica, sans-serif;
+    font-family: 'Source Sans 3', system-ui, sans-serif;
     margin: 0;
 }
 
@@ -742,44 +758,48 @@ dobInput::-webkit-datetime-edit {
 
 
 #resultHeader {
-  font-size: 30px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 35px;
   color: #000000;
-  margin-top: 38px;
+  margin-top: 50px;
+  margin-bottom: 17.5px;
 }
 
 
 /* Message (congratulations or not) */
 #resultMessage {
+  font-family: 'Source Sans 3', system-ui, sans-serif;
   font-size: 22px;
-  font-weight: 500;
-  margin-top: 5px;
+  font-weight: 400;
   color: #000000; 
 }
 
 #resultText {
+  font-family: 'Source Sans 3', system-ui, sans-serif;
   letter-spacing: 1px;
-  margin-top: 38px;
-  margin-bottom: 12px;
+  margin-top: 25px;
+  margin-bottom: 10px;
 }
 
 #resultName {
+  font-family: 'Source Sans 3', system-ui, sans-serif;
   font-size: 34px;
   color: #000000;
-  margin-top: 30px;   /* small space below the score */
-  margin-bottom: 20px; /* closer to category */
+  margin-top: 25px;   /* small space below the score */
+  margin-bottom: 10px; /* closer to category */
   font-weight: bold;
 
 }
 
 #resultInfo {
-  gap: 150px;
+  gap: 130px;
 }
 
 #resultCongratulation {
   font-size: 22px;
   color: #000000;
   margin-top: 0;      /* remove default top margin */
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 
@@ -796,7 +816,7 @@ dobInput::-webkit-datetime-edit {
   border-radius: 5px;
   background-color: white;
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: 'Source Sans 3', system-ui, sans-serif;
 }
 
 #downloadLink a {
@@ -865,7 +885,7 @@ dobInput::-webkit-datetime-edit {
 }
 
 .nav-item {
-  font-family: Arial, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: bold;
   font-size: 22px;
   display: inline-block;
@@ -876,7 +896,7 @@ dobInput::-webkit-datetime-edit {
 }
 
 .nav-item:hover {
-  transform: scale(1.15); /* increase size by 10% */
+  transform: translateY(-4px); /* move up + scale */
   opacity: 0.9; /* slightly fade for effect */
 }
 
@@ -952,7 +972,7 @@ textarea::placeholder {
   font-size: 14px;       /* change to whatever size you want */
   color: #999;           /* optional: change color */
   font-weight: normal;   /* optional */
-  font-family: Arial, sans-serif; /* optional */
+  font-family: 'Source Sans 3', system-ui, sans-serif;
 }
 
 .enquiry-subtext {
@@ -1106,7 +1126,7 @@ form select:focus {
 #downloadContainer {
     width: 350px;          /* width of the rectangle */
 
-    font-family: sans-serif;
+    font-family: 'Source Sans 3', system-ui, sans-serif;
     font-size: 18px;
 }
 
@@ -1114,7 +1134,7 @@ form select:focus {
 
     margin: 0 auto;  /* centers horizontally */
     text-align: left;    
-    font-family: sans-serif;
+    font-family: 'Source Sans 3', system-ui, sans-serif;
     font-size: 18px;
     
 }
@@ -1262,8 +1282,9 @@ form select:focus {
     margin-bottom: 10px;
 }
 .home-content p {
-    font-family: 'Roboto', sans-serif !important;
-    font-size: 18px;
+    font-weight: 500;
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    font-size: 20px;
     line-height: 1.5;
 
 }
@@ -1283,9 +1304,9 @@ form select:focus {
     align-items: center;
     position: fixed;
     top: 45%;
-    right: 11%;
+    right: 13%;
     
-    padding: 22px 32px;               /* replaces px padding */
+    padding: 22px 38px;               /* replaces px padding */
     
     font-size: 1.4rem;             /* responsive text (scales with width) */
     font-weight: bold;
@@ -1361,6 +1382,7 @@ section.visible {
 
 
 .amc-content {
+    font-weight: 500;
     display: flex;
     flex-direction: column;     /* stack text and buttons vertically */
     align-items: flex-start;    /* all text stuck to left */
@@ -1378,6 +1400,7 @@ section.visible {
 
 .amc-text h1 {
     font-size: 2.5rem;
+    margin-top: 50px;
     margin-bottom: 10px;
     text-shadow: 2px 2px 8px rgba(0,0,0,0.5); /* text shadow */
     position: relative;
@@ -1394,11 +1417,20 @@ section.visible {
     border-radius: 2px;
 }
 
+#amc8Section .amc-content {
+    margin-top: 45px;
+    font-family: 'Source Sans 3', system-ui, sans-serif !important;
+}
+
+#amc8Section .amc-text {
+  margin-bottom: 0px;
+}
+
 
 .amc-text .amc-description, .amc-text .amc-dates {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     margin-top: 25px;
-    font-family: 'Roboto', sans-serif !important;
+    font-family: 'Source Sans 3', system-ui, sans-serif;
     line-height: 1.5;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     margin-bottom: 0px;
@@ -1408,7 +1440,7 @@ section.visible {
 
 .button-container {
   width: 100%; 
-    margin-top: 50px !important;
+    margin-top: 25px !important;
     display: flex;
     justify-content: center;       /* horizontal center */
     align-items: center;
