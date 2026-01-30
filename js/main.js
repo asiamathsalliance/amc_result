@@ -94,6 +94,15 @@ document.addEventListener('DOMContentLoaded', function() {
         emailBox.style.display = 'flex';
     });
 
+    const downloadCert8 = document.getElementById('amc8-button2'); // download cert. AMC 8
+    downloadCert8.addEventListener('click', function() {
+        setCategories(categoriesBtn2);
+        isAMC8 = true;
+        const headerMessage = document.getElementById('headerMessage');
+        headerMessage.textContent = "Download Your Certificate!";
+        emailBox.style.display = 'flex';
+    });
+
     // CLOSE MODAL BUTTON FOR RESULT/CERTIFICATE
     closeBox.addEventListener('click', function() {
         emailBox.style.display = 'none';

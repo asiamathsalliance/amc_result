@@ -219,10 +219,11 @@ button:hover {
 }
 .modal-content select {
   width: 85%;
-  padding: 10px 45px 10px 12px;   /* extra room on right for arrow */
+  padding: 10px 45px 14px 12px;   /* extra room on right for arrow */
   font-size: 16px;
   border-radius: 5px;
   color: #999;
+  line-height: 1.3;
   border: 1px solid #ccc;
   font-family: 'Source Sans 3', system-ui, sans-serif;
   background-color: white;
@@ -442,15 +443,7 @@ input {
      font-size: 16px;
      color: #999
 }
-select {
-    padding-left: 12px !important;      /* horizontal padding on the left */
-    padding-top: 0 !important;          /* no vertical padding */
-    padding-bottom: 0 !important;       /* no vertical padding */
-    margin: 0;    /* removes outer space */
-    -webkit-appearance: none;  /* Chrome, Safari */
-    -moz-appearance: none;     /* Firefox */
-    appearance: none;          /* standard */
-}
+
 
 
 #enquiryCategory input::placeholder {
@@ -484,7 +477,7 @@ input[type="date"]::placeholder {
 }
 
 #headerMessage {
-    font-size: 28px !important;
+    font-size: 30px !important;
     margin-top: 10px;
     margin-bottom: 24px;
 }
