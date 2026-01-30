@@ -442,6 +442,16 @@ input {
      font-size: 16px;
      color: #999
 }
+select {
+    padding-left: 12px !important;      /* horizontal padding on the left */
+    padding-top: 0 !important;          /* no vertical padding */
+    padding-bottom: 0 !important;       /* no vertical padding */
+    margin: 0;    /* removes outer space */
+    -webkit-appearance: none;  /* Chrome, Safari */
+    -moz-appearance: none;     /* Firefox */
+    appearance: none;          /* standard */
+}
+
 
 #enquiryCategory input::placeholder {
     color: #999;
@@ -729,7 +739,7 @@ dobInput::-webkit-datetime-edit {
 
 #resultCongratulation {
     font-size: 20px;
-    font-weight: 500;
+    font-weight: 400;
     color: #333;
     margin-top: 8px; /* close to the score */
 }
