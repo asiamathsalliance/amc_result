@@ -443,18 +443,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     });
 
-    function capitalizeFullName(name) {
-        if (!name) return ""; // handle empty or undefined
-
-        return name
-            .split(" ")                    // split into words
-            .filter(word => word.length)   // remove extra spaces
-            .map(word => word[0].toUpperCase() + word.slice(1).toLowerCase()) // capitalize
-            .join(" ");                    // join back into a string
-    }
-
-    
-
     // SHOW RESULT / 150 MODAL
     function showResultModal(tempFirstName, tempLastName, tempResult, tempCategory, isAMC8) {
         const modal = document.getElementById('resultBox');

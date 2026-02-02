@@ -7,24 +7,18 @@
     <title>AMC 2025 Result</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <link rel="icon" type="image/png" id="favicon" href="favicon-final.png">
+    <link rel="icon" type="image/png" id="favicon" href="logo-images/favicon-final.png">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <script src="https://unpkg.com/cursor-effects@latest/dist/browser.js"></script>
-
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-
 
     <script type="text/javascript"
         src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
@@ -45,21 +39,21 @@
 
     <div class="background-slider">
         <div class="track track1">
-            <div class="slide" style="background-image: url('background1.jpg');"></div>
-            <div class="slide" style="background-image: url('background2.jpg');"></div>
-            <div class="slide" style="background-image: url('background4.jpg');"></div>
+            <div class="slide" style="background-image: url('background-images/background1.jpg');"></div>
+            <div class="slide" style="background-image: url('background-images/background2.jpg');"></div>
+            <div class="slide" style="background-image: url('background-images/background3.jpg');"></div>
         </div>
 
         <div class="track track2">
-            <div class="slide" style="background-image: url('background1.jpg');"></div>
-            <div class="slide" style="background-image: url('background2.jpg');"></div>
-            <div class="slide" style="background-image: url('background4.jpg');"></div>
+            <div class="slide" style="background-image: url('background-images/background1.jpg');"></div>
+            <div class="slide" style="background-image: url('background-images/background2.jpg');"></div>
+            <div class="slide" style="background-image: url('background-images/background3.jpg');"></div>
         </div>
     </div>
 
     <div class="top-bar">
         <a href="https://maa.org/student-programs/amc/" target="_blank">
-            <img src="logo-amc.png" alt="Logo" class="top-logo">
+            <img src="logo-images/logo-amc.png" alt="Logo" class="top-logo">
         </a>
         <div class="top-texts">
             <span class="nav-item active" data-target="homeSection">Home</span>
@@ -87,7 +81,7 @@
                 </p>
 
             </div>
-            <button class="home-button">AMC 8 2026 Result</button>
+            <button class="home-button">View AMC 8 2026 Result</button>
 
 
 
@@ -109,7 +103,7 @@
                     </p>
                 </div>
                 <div class="image-block">
-                    <img src="woodenfigure.png" alt="AMO Image" class="amo-image">
+                    <img src="wood-figure/woodenfigure.png" alt="AMO Image" class="amo-image">
                 </div>
             </div>
 
@@ -135,7 +129,7 @@
                     </p>
                 </div>
                 <div class="image-block">
-                    <img src="woodenfigure1.png" alt="AMO Image" class="amo-image">
+                    <img src="wood-figure/woodenfigure1.png" alt="AMO Image" class="amo-image">
                 </div>
             </div>
 
@@ -253,79 +247,29 @@
             </div>
     </div>
 
-    <!-- LOADING SCREEN FOR DOWNLOAD-->
-        <div id="loadingOverlay" class="loading-overlay">
-            <div class="spinner"></div>
-            <p id="overlayText"></p>
-        </div>
+    <!-- LOADING SCREEN FOR RESULT-->
+    <div id="loadingOverlay2" class="loading-overlay">
+        <div class="spinner"></div>
+    </div>
 
-        <!-- LOADING SCREEN FOR RESULT-->
-        <div id="loadingOverlay2" class="loading-overlay">
-            <div class="spinner"></div>
-        </div>
-
-        <!-- LOADING SCREEN FOR RESULT TO CERTIFICATE PAGE-->
-        <div id="loadingOverlay3" class="loading-overlay">
-            <div class="spinner"></div>
-        </div>
-
-        <!-- LOADING SCREEN TO OPEN CONTACT US PAGE-->
-        <div id="loadingOverlay4" class="loading-overlay">
-            <div class="spinner"></div>
-        </div>
-
-        <!-- PROGRESS BAR FOR DOWNLOAD -->
-        <div id="downloadOverlay">
-            <div id="downloadContainer">
-                <div id="downloadBarWrapper">
-                    <div id="downloadLabel"></div>
-                    <div id="downloadBarContainer">
-                        <div id="downloadBar"></div>
-                    </div>
+    <!-- PROGRESS BAR FOR DOWNLOAD -->
+    <div id="downloadOverlay">
+        <div id="downloadContainer">
+            <div id="downloadBarWrapper">
+                <div id="downloadLabel"></div>
+                <div id="downloadBarContainer">
+                    <div id="downloadBar"></div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- DON'T TOUCH THIS -->
-        <div id="certBox" class="modal" style="display:none;">
-            <div class="modal-content">
-
-                <h2>Download Your Certificate!</h2>
-
-                <!-- Email input group -->
-                <div class="input-group">
-                    <label for="certEmailInput">Email Address:</label>
-                    <input type="email" id="certEmailInput" placeholder="example@email.com" required>
-                </div>
-
-                <!-- Category input group -->
-                <div class="input-group">
-                    <label for="certCategorySelect">Category:</label>
-                    <select id="certCategorySelect" required>
-                        <option value="" disabled selected hidden>Select your category</option>
-                        <option value="AMC 10A">AMC 10A</option>
-                        <option value="AMC 10B">AMC 10B</option>
-                        <option value="AMC 12A">AMC 12A</option>
-                        <option value="AMC 12B">AMC 12B</option>
-                    </select>
-                </div>
-
-                <div class="modal-buttons">
-                    <button id="submitCertEmail">Download</button>
-                    <button id="closeCert">Close</button>
-                </div>
-
-            </div>
+    <div id="errorModal" class="modal">
+        <div class="modal-content error-content">
+            <span id="closeError" class="close">&times;</span>
+            <p id="errorText"></p>
         </div>
-
-        <div id="errorModal" class="modal">
-            <div class="modal-content error-content">
-                <span id="closeError" class="close">&times;</span>
-                <p id="errorText"></p>
-            </div>
-        </div>
+    </div>
     
-
-
 </body>
 </html>
