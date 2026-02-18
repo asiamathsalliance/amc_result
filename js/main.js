@@ -451,10 +451,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const scoreText = document.getElementById('resultText');
         const congratulationMessage = document.getElementById('resultCongratulation');
 
-        congratulationMessage.textContent = 'Congratulations for completing AMC!';
         if(isAMC8 == true) {
+            congratulationMessage.textContent = 'Congratulations for completing AMC 8!';
             scoreText.textContent = tempResult + ' / 25';
         } else {
+            congratulationMessage.textContent = 'Congratulations for completing AMC!';
             scoreText.textContent = tempResult + ' / 150';
         }
 
