@@ -95,7 +95,7 @@ body::before {
   z-index: -1;                  /* behind content */
 }
 
-#amc8-button1, #button1 {
+#amc8-button1, #button1, #aime-button1 {
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5); /* subtle shadow */
   width: 200px;
   padding: 22px 26px;
@@ -103,12 +103,16 @@ body::before {
   font-weight: 600;
 }
 
-#amc8-button2, #button2 {
+#amc8-button2, #button2, #aime-button2 {
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5); /* subtle shadow */
   width: 280px;
   padding: 22px 26px;
   font-size: 22px !important;
   font-weight: 600;
+}
+
+#aime-button1, #aime-button2 {
+  margin-top: 1%;
 }
 
 #amc-remark {
@@ -1427,6 +1431,11 @@ section.visible {
 
 #amc8Section .amc-text {
   margin-bottom: 0px;
+}
+
+#aimeSection .image-block {
+  margin-top: 2%;
+  
 }
 
 

@@ -2,6 +2,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const categoriesBtn2 = [
         "AMC 8"
     ];
+
+    const categoriesBtn3 = [
+        "AIME I",
+        "AIME II"
+    ];
     const categoriesBtn1 = [
         "AMC 10A",
         "AMC 10B",
@@ -11,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     isAMC8 = false;
+    isAIME = false
 
     let tempFirstName, tempLastName, tempFullName, tempEmail, tempDob, tempCategory, tempResult, tempCertificate;
     function resetTempVariables() {
@@ -79,6 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // VIEW RESULT BUTTON
     viewResult.addEventListener('click', function() {
         isAMC8 = false;
+        isAIME = false;
         const headerMessage = document.getElementById('headerMessage');
         setCategories(categoriesBtn1);
         headerMessage.textContent = "Check Your Result!";
@@ -89,7 +96,16 @@ document.addEventListener('DOMContentLoaded', function() {
     viewResult8.addEventListener('click', function() {
         setCategories(categoriesBtn2);
         isAMC8 = true;
-        const headerMessage = document.getElementById('headerMessage');
+        isAIME = false;
+        headerMessage.textContent = "Check Your Result!";
+        emailBox.style.display = 'flex';
+    });
+
+    const viewResultAIME = document.getElementById('aime-button1'); // View Result AIME
+    viewResultAIME.addEventListener('click', function() {
+        setCategories(categoriesBtn3);
+        isAIME = true;
+        isAMC8 = false;
         headerMessage.textContent = "Check Your Result!";
         emailBox.style.display = 'flex';
     });
@@ -98,6 +114,16 @@ document.addEventListener('DOMContentLoaded', function() {
     downloadCert8.addEventListener('click', function() {
         setCategories(categoriesBtn2);
         isAMC8 = true;
+        isAIME = false;
+        const headerMessage = document.getElementById('headerMessage');
+        headerMessage.textContent = "Download Your Certificate!";
+        emailBox.style.display = 'flex';
+    });
+
+    const downloadCertAIME = document.getElementById('aime-button2'); // download cert. AIME
+    downloadCertAIME.addEventListener('click', function() {
+        setCategories(categoriesBtn3);
+        isAIME = true;
         const headerMessage = document.getElementById('headerMessage');
         headerMessage.textContent = "Download Your Certificate!";
         emailBox.style.display = 'flex';
@@ -306,7 +332,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             loadingOverlay2.style.display = 'none';
                             document.getElementById('emailBox').style.display = 'none';
 
-                            showResultModal(tempFirstName, tempLastName, tempResult, tempCategory, isAMC8);
+                            showResultModal(tempFirstName, tempLastName, tempResult, tempCategory, isAMC8, isAIME);
 
                             categorySelect.selectedIndex = 0;
                             categorySelect.style.color = '#999';
@@ -444,7 +470,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // SHOW RESULT / 150 MODAL
-    function showResultModal(tempFirstName, tempLastName, tempResult, tempCategory, isAMC8) {
+    function showResultModal(tempFirstName, tempLastName, tempResult, tempCategory, isAMC8, isAIME) {
         const modal = document.getElementById('resultBox');
         const name = document.getElementById('resultName');
         const messageText = document.getElementById('resultMessage');
@@ -454,6 +480,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if(isAMC8 == true) {
             congratulationMessage.textContent = 'Congratulations for completing AMC 8!';
             scoreText.textContent = tempResult + ' / 25';
+        } else if(isAIME == true) {
+            congratulationMessage.textContent = 'Congratulations for completing AIME!';
+            scoreText.textContent = tempResult + ' / 15';
         } else {
             congratulationMessage.textContent = 'Congratulations for completing AMC!';
             scoreText.textContent = tempResult + ' / 150';
@@ -488,7 +517,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 100);
             
         } else {
-            if(isAMC8 == true) {
+            if(isAMC8 == true || isAIME == true) {
                 messageText.textContent = 'Category: ' + tempCategory + ' 2026';
             } else {
                 messageText.textContent = 'Category: ' + tempCategory + ' 2025';
