@@ -124,6 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
     downloadCertAIME.addEventListener('click', function() {
         setCategories(categoriesBtn3);
         isAIME = true;
+        isAMC8 = false;
         const headerMessage = document.getElementById('headerMessage');
         headerMessage.textContent = "Download Your Certificate!";
         emailBox.style.display = 'flex';
