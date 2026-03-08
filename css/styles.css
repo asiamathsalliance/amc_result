@@ -1430,8 +1430,13 @@ section.visible {
 }
 
 #aimeSection .image-block {
-  margin-top: 2%;
+  margin-top: 20px;
   
+}
+
+#aimeSection .amc-content {
+  margin-top: 3%;
+  font-family: 'Source Sans 3', system-ui, sans-serif !important;
 }
 
 
