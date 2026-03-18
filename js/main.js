@@ -429,14 +429,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             async function download() {
-                alert("here")
                 try {
                     resetTempVariables();
                     resetSpinner();
                     showSpinner();
 
                     await updateStudentInfo(firstName, lastName, dob, email, selectedCategory);
-                    alert(tempCertificate)
 
                     if(errorText.textContent === "Server not responding. Please try again.") {
                         showSpinner();
