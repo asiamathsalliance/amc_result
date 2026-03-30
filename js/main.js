@@ -305,18 +305,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     await updateStudentInfo(firstName, lastName, dob, email, selectedCategory);
 
 
-                    if(isAIME) {
-                        showSpinner();
-                        setTimeout(() => {
-                            hideSpinnerKeepBackground();
-                            loadingOverlay2.style.display = 'none';
-                            errorBox.style.display = 'flex';
-                            errorText.textContent = "AIME 2026 results are not available yet.";
-                        }, 2000);
-                        closeErrorBox.addEventListener('click', function() {
-                            errorBox.style.display = 'none';
-                        });
-                    } else if (errorText.textContent === "Server not responding. Please try again.") {
+                    if (errorText.textContent === "Server not responding. Please try again.") {
                         showSpinner();
                         setTimeout(() => {
                             hideSpinnerKeepBackground();
