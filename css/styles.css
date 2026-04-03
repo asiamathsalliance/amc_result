@@ -1429,6 +1429,52 @@ section.visible {
   margin-bottom: 0px;
 }
 
+#amc8Section .amc-text.amc8-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 5px;
+  width: 100%;
+  margin-left: 0;
+  box-sizing: border-box;
+}
+
+#amc8Section .amc8-text-col {
+  flex: 0 0 35%;
+  max-width: 35%;
+  min-width: 0;
+}
+
+#amc8Section .amc8-image-col {
+  flex: 0 0 70%;
+  max-width: 70%;
+  min-width: 0;
+  display: flex;
+  margin-top: 4%;
+  margin-bottom: 5%;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+#amc8Section .amc8-hero-img {
+  width: 80%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  #amc8Section .amc-text.amc8-row {
+    flex-direction: column;
+  }
+  #amc8Section .amc8-text-col,
+  #amc8Section .amc8-image-col {
+    flex: 1 1 auto;
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
 #aimeSection .image-block {
   margin-top: 20px;
   
