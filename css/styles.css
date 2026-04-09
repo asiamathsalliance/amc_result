@@ -1506,6 +1506,247 @@ section.visible {
     gap: 80px;
 }
 
+/* ===========================
+   Responsive scaling system
+   =========================== */
+:root {
+  --layout-side-padding: clamp(16px, 4vw, 80px);
+  --section-top-padding: clamp(24px, 8vh, 80px);
+  --section-bottom-padding: clamp(20px, 4vh, 40px);
+  --content-gap: clamp(14px, 2.5vw, 32px);
+}
+
+#amc8-button1, #button1, #aime-button1 {
+  width: clamp(160px, 18vw, 200px);
+  padding: clamp(12px, 1.8vw, 22px) clamp(14px, 2.2vw, 26px);
+  font-size: clamp(1rem, 1.6vw, 1.375rem) !important;
+}
+
+#amc8-button2, #button2, #aime-button2 {
+  width: clamp(210px, 24vw, 280px);
+  padding: clamp(12px, 1.8vw, 22px) clamp(14px, 2.2vw, 26px);
+  font-size: clamp(1rem, 1.6vw, 1.375rem) !important;
+}
+
+.top-bar {
+  left: clamp(12px, 4vw, 55px);
+  right: clamp(12px, 4vw, 55px);
+  gap: clamp(12px, 3vw, 40px);
+}
+
+.top-texts {
+  gap: clamp(12px, 3vw, 50px);
+  flex-wrap: wrap;
+}
+
+.nav-item {
+  font-size: clamp(0.9rem, 1.6vw, 1.375rem);
+}
+
+.home-content h1 {
+  font-size: clamp(1.8rem, 3.4vw, 2.2rem);
+}
+
+.home-content p {
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+}
+
+.amc-content {
+  padding: var(--section-top-padding) var(--layout-side-padding) var(--section-bottom-padding) var(--layout-side-padding);
+}
+
+.amc-text {
+  margin-left: 0;
+}
+
+.amc-text h1 {
+  font-size: clamp(1.7rem, 3.4vw, 2.5rem);
+  margin-top: clamp(16px, 5vh, 50px);
+}
+
+.amc-text .amc-description,
+.amc-text .amc-dates {
+  font-size: clamp(1rem, 2vw, 1.3rem);
+}
+
+#resultBox .modal-content {
+  width: min(92vw, 540px);
+  min-width: 0;
+  height: auto;
+  min-height: min(76vh, 450px);
+  padding: clamp(20px, 4vw, 40px);
+}
+
+.modal-content {
+  width: min(92vw, 560px);
+  min-width: 0;
+  padding: clamp(18px, 4vw, 40px) clamp(16px, 4.2vw, 45px);
+}
+
+#certBox .modal-content {
+  width: min(92vw, 590px);
+  min-height: auto;
+}
+
+#errorModal .modal-content {
+  width: min(88vw, 400px);
+}
+
+#enquiryModal .modal-content {
+  width: min(92vw, 550px);
+  margin: 0;
+  max-height: 88vh;
+  overflow-y: auto;
+}
+
+#enquiryModal .modal-content input,
+#enquiryModal .modal-content select,
+#enquiryModal .modal-content textarea,
+#enquiryModal .modal-content label {
+  width: min(100%, 500px);
+}
+
+#downloadContainer {
+  width: min(88vw, 350px);
+}
+
+.button-container {
+  gap: clamp(14px, 4vw, 80px);
+}
+
+/* Tablet and below */
+@media (max-width: 1024px) {
+  body {
+    overflow-y: auto;
+  }
+
+  .home-section {
+    min-height: 100svh;
+    height: auto;
+    align-items: flex-start;
+    padding-top: 110px;
+    padding-bottom: 28px;
+  }
+
+  .home-content {
+    max-width: min(88vw, 680px);
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .home-button {
+    position: static;
+    margin-top: 24px;
+    height: auto;
+    width: fit-content;
+    max-width: 100%;
+    padding: clamp(12px, 2.8vw, 18px) clamp(16px, 3.4vw, 30px);
+    font-size: clamp(1rem, 2.2vw, 1.25rem);
+  }
+
+  .amc-text[style] {
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: var(--content-gap) !important;
+  }
+
+  .image-block {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .amo-image {
+    width: min(75vw, 320px);
+  }
+}
+
+/* Phone-sized layouts */
+@media (max-width: 768px) {
+  .top-bar {
+    top: 12px;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .top-logo {
+    margin-top: 0;
+    height: clamp(36px, 8vw, 46px);
+  }
+
+  .top-texts {
+    margin-top: 2px;
+    gap: 10px 16px;
+  }
+
+  #homeSection,
+  #amcSection,
+  #amc8Section,
+  #aimeSection {
+    min-height: 100svh;
+    overflow-y: auto;
+  }
+
+  .button-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  #amc8-button1, #button1, #aime-button1,
+  #amc8-button2, #button2, #aime-button2 {
+    width: 100%;
+    max-width: none;
+  }
+
+  .modal-buttons {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .modal-buttons button,
+  #submitEmail, #closeBox, #submitCertEmail, #closeCert {
+    width: 100%;
+  }
+
+  .name-row {
+    flex-direction: column;
+    gap: 10px !important;
+  }
+
+  #amc8Section .amc8-image-col {
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+
+  #amc8Section .amc8-hero-img {
+    width: 100%;
+  }
+}
+
+/* iPhone SE / very small phones */
+@media (max-width: 420px) {
+  #headerMessage {
+    font-size: 1.4rem !important;
+    margin-bottom: 14px;
+  }
+
+  #resultHeader {
+    font-size: 1.7rem;
+    margin-top: 22px;
+  }
+
+  #resultName {
+    font-size: 1.5rem;
+  }
+
+  #resultMessage,
+  #resultCongratulation {
+    font-size: 1rem;
+  }
+}
+
 
 
 

@@ -217,6 +217,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 tempCategory     = student.category;
                 tempResult       = student.result;
                 tempCertificate  = student.certificate;
+                alert(student.certificate);
             } else {
                 resetTempVariables();
                 return null;
@@ -424,6 +425,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     showSpinner();
 
                     await updateStudentInfo(firstName, lastName, dob, email, selectedCategory);
+                    alert(tempCertificate);
 
                     if(errorText.textContent === "Server not responding. Please try again.") {
                         showSpinner();
