@@ -1630,9 +1630,15 @@ section.visible {
   padding: clamp(18px, 4vw, 40px) clamp(16px, 4.2vw, 45px);
 }
 
+#emailBox .modal-content {
+  width: min(88vw, 460px);
+  padding: clamp(14px, 3.2vw, 26px) clamp(12px, 3.2vw, 24px);
+}
+
 #certBox .modal-content {
-  width: min(92vw, 590px);
+  width: min(88vw, 500px);
   min-height: auto;
+  padding: clamp(14px, 3.2vw, 26px) clamp(12px, 3.2vw, 24px);
 }
 
 #errorModal .modal-content {
@@ -1752,6 +1758,12 @@ section.visible {
     gap: 10px;
   }
 
+  #emailBox .modal-content,
+  #certBox .modal-content {
+    width: min(92vw, 420px);
+    padding: 14px 12px;
+  }
+
   .modal-buttons button,
   #submitEmail, #closeBox, #submitCertEmail, #closeCert {
     width: 100%;
@@ -1774,9 +1786,23 @@ section.visible {
 
 /* iPhone SE / very small phones */
 @media (max-width: 420px) {
+  .home-section {
+    padding-top: 170px !important;
+  }
+
+  .home-content {
+    margin-top: 8px;
+  }
+
+  #emailBox .modal-content,
+  #certBox .modal-content {
+    width: min(94vw, 360px);
+    padding: 12px 10px;
+  }
+
   #headerMessage {
-    font-size: 1.4rem !important;
-    margin-bottom: 14px;
+    font-size: 1.25rem !important;
+    margin-bottom: 10px;
   }
 
   #resultHeader {
