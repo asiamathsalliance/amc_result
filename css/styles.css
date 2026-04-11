@@ -629,8 +629,9 @@ input::placeholder {
 
 #emailBox .modal-content {
   z-index: 9999 !important;
-  width: 100%;          /* wider modal */
-  max-width: 350px;    /* optional max size */
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 #categorySelect option[value=""] {
@@ -1444,6 +1445,8 @@ section.visible {
   flex: 0 0 35%;
   max-width: 35%;
   min-width: 0;
+  margin-top: 4%;
+  align-self: flex-start;
 }
 
 #amcSection .amc1012-image-col {
@@ -1522,9 +1525,10 @@ section.visible {
   }
 }
 
-#aimeSection .image-block {
-  margin-top: 20px;
-  
+#aimeSection .amc-text.aime-text-only {
+  width: 100%;
+  margin-left: 0;
+  max-width: min(92vw, 52rem);
 }
 
 #aimeSection .amc-content {
@@ -1630,15 +1634,21 @@ section.visible {
   padding: clamp(18px, 4vw, 40px) clamp(16px, 4.2vw, 45px);
 }
 
-#emailBox .modal-content {
-  width: min(88vw, 460px);
-  padding: clamp(14px, 3.2vw, 26px) clamp(12px, 3.2vw, 24px);
-}
+@media (min-width: 769px) {
+  #emailBox .modal-content {
+    width: min(92vw, 560px);
+    max-width: 560px;
+    min-width: 500px;
+    padding: 40px 45px;
+  }
 
-#certBox .modal-content {
-  width: min(88vw, 500px);
-  min-height: auto;
-  padding: clamp(14px, 3.2vw, 26px) clamp(12px, 3.2vw, 24px);
+  #certBox .modal-content {
+    width: 590px;
+    max-width: 590px;
+    min-width: 500px;
+    padding: 30px 40px;
+    min-height: 463px;
+  }
 }
 
 #errorModal .modal-content {
@@ -1761,7 +1771,13 @@ section.visible {
   #emailBox .modal-content,
   #certBox .modal-content {
     width: min(92vw, 420px);
+    min-width: 0;
+    max-width: 420px;
     padding: 14px 12px;
+  }
+
+  #certBox .modal-content {
+    min-height: auto;
   }
 
   .modal-buttons button,
@@ -1797,7 +1813,13 @@ section.visible {
   #emailBox .modal-content,
   #certBox .modal-content {
     width: min(94vw, 360px);
+    min-width: 0;
+    max-width: 360px;
     padding: 12px 10px;
+  }
+
+  #certBox .modal-content {
+    min-height: auto;
   }
 
   #headerMessage {
