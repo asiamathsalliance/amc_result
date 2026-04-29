@@ -563,25 +563,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // LINK FROM RESULT MODAL TO DOWNLOAD CERTIFICATE MODAL
     document.getElementById("openCertLink").addEventListener("click", function(event) {
+        event.preventDefault();
+        document.getElementById("resultBox").style.display = "none";
+        headerMessage.textContent = "Download Your Certificate!";
+        document.getElementById("emailBox").style.display = "flex";
         resetSpinner();
-        showSpinner();
-
-        setTimeout(() => {
-            // Close the result box
-            event.preventDefault(); // prevent the page from jumping
-            document.getElementById("resultBox").style.display = "none";
-
-            // Open the certificate box
-            headerMessage.textContent = "Download Your Certificate!";
-            document.getElementById("emailBox").style.display = "flex";
-            hideSpinnerKeepBackground();
-            loadingOverlay2.style.display = 'none';
-            
-        }, 1250);
-        setTimeout (() => {
-            resetSpinner();
-
-        }, 1250);
     });
 
     /* ENQUIRY MODAL SET UP */
@@ -726,62 +712,94 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     
-    /* SWITCHING NAVIGATION BARS */
-    document.querySelectorAll('.nav-item').forEach(item => {
-        if (item.classList.contains('contact-nav')) return;
+    /* SINGLE PAGE NAVIGATION / REVEAL */
+    const navItems = document.querySelectorAll('.nav-item[data-target]');
+    const topBar = document.querySelector('.top-bar');
+    const navToggle = document.getElementById('navToggle');
+    const siteNav = document.getElementById('siteNav');
+    const navOverlay = document.getElementById('navOverlay');
+    const contactTrigger = document.querySelector('.contact-nav');
 
-        item.addEventListener('click', () => {
+    function closeMobileNav() {
+        if (!siteNav || !navToggle || !navOverlay) return;
+        siteNav.classList.remove('is-open');
+        navOverlay.classList.remove('is-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+    }
+
+    function openMobileNav() {
+        if (!siteNav || !navToggle || !navOverlay) return;
+        siteNav.classList.add('is-open');
+        navOverlay.classList.add('is-open');
+        navToggle.setAttribute('aria-expanded', 'true');
+    }
+
+    if (navToggle) {
+        navToggle.addEventListener('click', () => {
+            const isOpen = siteNav && siteNav.classList.contains('is-open');
+            if (isOpen) closeMobileNav();
+            else openMobileNav();
+        });
+    }
+    if (navOverlay) navOverlay.addEventListener('click', closeMobileNav);
+
+    navItems.forEach(item => {
+        item.addEventListener('click', (event) => {
+            event.preventDefault();
             const targetId = item.getAttribute('data-target');
             const targetSection = document.getElementById(targetId);
-
-            document.querySelectorAll('section').forEach(sec => {
-                if (sec === targetSection) return;
-                sec.classList.remove('visible'); // fade out others
-            });
-
-            targetSection.classList.add('visible'); // fade in target
+            if (!targetSection) return;
+            targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            closeMobileNav();
         });
     });
 
-    /* SETTING WHICH NAV-ITEM IS ACTIVE (UNDERLINED) */
-    const navItems = document.querySelectorAll('.nav-item');
-    navItems.forEach(item => {
-        item.addEventListener('click', () => {
-            // Skip if this is the contact nav
-            if (item.classList.contains('contact-nav')) return;
-
-            // Remove active from all other nav-items (excluding contact)
-            navItems.forEach(nav => {
-                if (!nav.classList.contains('contact-nav')) {
-                    nav.classList.remove('active');
-                }
-            });
-
-            // Add active only to clicked item
-            item.classList.add('active');
+    if (contactTrigger) {
+        contactTrigger.addEventListener('click', () => {
+            document.getElementById('enquiryModal').style.display = 'flex';
+            closeMobileNav();
         });
-    });
+    }
 
     const homeButton = document.querySelector('.home-button');
-
-    homeButton.addEventListener('click', () => {
-        const targetId = 'amc8Section';
-        const targetSection = document.getElementById(targetId);
-
-        // Hide all other sections
-        document.querySelectorAll('section').forEach(sec => {
-            if (sec !== targetSection) sec.classList.remove('visible');
+    const aboutLearnBtn = document.querySelector('.about-learn-btn');
+    if (homeButton) {
+        homeButton.addEventListener('click', () => {
+            const targetSection = document.getElementById('amc8Section');
+            if (targetSection) {
+                targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         });
+    }
 
-        // Show target section
-        targetSection.classList.add('visible');
-
-        // Update nav underline (exclude contact)
-        navItems.forEach(nav => {
-            if (!nav.classList.contains('contact-nav')) nav.classList.remove('active');
+    if (aboutLearnBtn) {
+        aboutLearnBtn.addEventListener('click', () => {
+            closeMobileNav();
         });
-        const amcNav = document.querySelector('.nav-item[data-target="amc8Section"]');
-        if (amcNav) amcNav.classList.add('active');
+    }
+
+    document.querySelectorAll('.reveal-section').forEach((section) => {
+        section.classList.add('is-visible');
     });
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            const id = entry.target.getAttribute('id');
+            navItems.forEach((nav) => {
+                nav.classList.toggle('active', nav.getAttribute('data-target') === id);
+            });
+        });
+    }, { threshold: 0.35, rootMargin: "-10% 0px -45% 0px" });
+    document.querySelectorAll('main section[id]').forEach(sec => sectionObserver.observe(sec));
+
+    if (topBar) {
+        const updateTopBarState = () => {
+            topBar.classList.toggle('scrolled', window.scrollY > 4);
+        };
+        updateTopBarState();
+        window.addEventListener('scroll', updateTopBarState, { passive: true });
+    }
+
     
 });
