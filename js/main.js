@@ -131,11 +131,16 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // CLOSE MODAL BUTTON FOR RESULT/CERTIFICATE
-    closeBox.addEventListener('click', function() {
+    function closeEmailModal() {
         emailBox.style.display = 'none';
         document.getElementById("categorySelect").selectedIndex = 0;
         document.getElementById("categorySelect").style.color = "#999";
-    });
+    }
+    closeBox.addEventListener('click', closeEmailModal);
+    const closeEmailModalBtn = document.getElementById('closeEmailModal');
+    if (closeEmailModalBtn) {
+        closeEmailModalBtn.addEventListener('click', closeEmailModal);
+    }
 
     // DOWNLOAD CERTIFICATE BUTTON
     downloadCert.addEventListener('click', function() {
@@ -178,9 +183,11 @@ document.addEventListener('DOMContentLoaded', function() {
         ]);
     }
 
+    const BACKEND_BASE_URL = "https://competition-backend-1-zd68.onrender.com";
+
     function keepBackendAwake() {
         setInterval(() => {
-            fetch("https://competition-backend-1aga.onrender.com/health")
+            fetch(`${BACKEND_BASE_URL}/health`)
             .then(res => {
                 if (res.ok) console.log("✅ Backend ping successful");
                 else console.warn("⚠️ Backend ping returned error:", res.status);
@@ -197,7 +204,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const data = { firstName, lastName, dob, email, category};
         try {
             const response = await fetchWithTimeout(
-                "https://competition-backend-1aga.onrender.com/check-result",
+                `${BACKEND_BASE_URL}/check-result`,
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -217,7 +224,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 tempCategory     = student.category;
                 tempResult       = student.result;
                 tempCertificate  = student.certificate;
-                alert(student.certificate);
             } else {
                 resetTempVariables();
                 return null;
