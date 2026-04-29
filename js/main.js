@@ -431,7 +431,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     showSpinner();
 
                     await updateStudentInfo(firstName, lastName, dob, email, selectedCategory);
-                    alert(tempCertificate);
 
                     if(errorText.textContent === "Server not responding. Please try again.") {
                         showSpinner();

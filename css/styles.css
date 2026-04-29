@@ -1552,14 +1552,19 @@ section.visible {
 }
 
 #aimeSection .amc-text.aime-text-only {
-  width: 100%;
-  margin-left: 0;
-  max-width: min(92vw, 52rem);
+  width: 88%;
+  margin-left: 6%;
+  margin-right: 0;
+  max-width: none;
 }
 
 #aimeSection .amc-content {
   margin-top: 3%;
   font-family: 'Source Sans 3', system-ui, sans-serif !important;
+}
+
+#aimeSection .button-container {
+  margin-top: 36px !important;
 }
 
 
@@ -1824,23 +1829,55 @@ section.visible {
   #amc8Section .amc8-hero-img {
     width: 100%;
   }
+
+  #aimeSection .amc-text.aime-text-only {
+    width: 92%;
+    margin-left: 4%;
+  }
 }
 
-/* iPhone: home hero title (exactly 2 lines) + compact result modal */
+/* iPhone: home layout + modal fit */
 @media (max-width: 430px) {
+  .top-bar {
+    position: fixed;
+    top: max(8px, env(safe-area-inset-top));
+    left: 4%;
+    right: 4%;
+    z-index: 20;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .top-texts {
+    margin-top: 0;
+    gap: 8px 12px;
+  }
+
+  .nav-item {
+    font-size: clamp(0.8rem, 3.3vw, 0.95rem);
+  }
+
   .home-section {
-    padding-top: max(178px, calc(112px + env(safe-area-inset-top))) !important;
+    min-height: 100svh;
+    height: auto;
+    padding-top: max(52%, calc(128px + env(safe-area-inset-top))) !important;
+    padding-bottom: 8%;
+    align-items: flex-start;
   }
 
   .home-content {
-    margin-top: 4px;
-    max-width: min(92vw, 22rem);
+    margin-top: 0;
+    margin-left: 4%;
+    margin-right: 4%;
+    max-width: 92%;
   }
 
   .home-content h1.home-title {
-    font-size: clamp(0.82rem, 4vw, 1.35rem);
-    line-height: 1.18;
-    letter-spacing: -0.025em;
+    font-size: clamp(1.25rem, 5.3vw, 1.55rem);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    font-family: 'Montserrat', sans-serif !important;
   }
 
   .home-content h1.home-title .home-title-line {
@@ -1848,7 +1885,19 @@ section.visible {
     display: block;
   }
 
-  #emailBox.modal {
+  .home-content p {
+    font-size: clamp(0.92rem, 3.5vw, 1.02rem);
+    line-height: 1.42;
+  }
+
+  .home-button {
+    margin-top: 14px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  #emailBox.modal,
+  #certBox.modal {
     align-items: flex-start;
     justify-content: center;
     padding: max(8px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left));
@@ -1856,13 +1905,14 @@ section.visible {
     -webkit-overflow-scrolling: touch;
   }
 
-  #emailBox .modal-content {
-    width: min(91vw, 300px);
+  #emailBox .modal-content,
+  #certBox .modal-content {
+    width: min(91vw, 330px);
     max-width: 91vw;
-    max-height: min(82dvh, calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 24px));
+    max-height: min(86dvh, calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 22px));
     min-width: 0;
     margin: 0 auto;
-    padding: 40px 9px 10px;
+    padding: 40px 10px 12px;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     gap: 8px;
@@ -1875,7 +1925,7 @@ section.visible {
   }
 
   #emailBox #headerMessage {
-    font-size: 1rem !important;
+    font-size: 1.02rem !important;
     margin-top: 0 !important;
     margin-bottom: 8px !important;
     padding-right: 32px;
@@ -1893,23 +1943,79 @@ section.visible {
     font-size: 15px !important;
     min-height: 40px;
   }
+
+  #certBox h2 {
+    margin-top: 8px;
+    margin-bottom: 14px;
+  }
+
+  #certBox .modal-buttons {
+    margin-top: 18px;
+  }
+
+  #enquiryModal {
+    align-items: flex-start;
+    justify-content: center;
+    padding: max(8px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left));
+    overflow-y: auto;
+  }
+
+  #enquiryModal .modal-content {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: min(92vw, 350px);
+    max-width: 92vw;
+    max-height: min(86dvh, calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 24px));
+    margin: 0 auto;
+    padding: 14px 10px 12px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #enquiryModal .close-modal {
+    top: 6px;
+    right: 8px;
+    font-size: 1.45rem;
+  }
+
+  #enquiryModal .modal-content input,
+  #enquiryModal .modal-content select,
+  #enquiryModal .modal-content textarea,
+  #enquiryModal .modal-content label {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  #enquiryModal .modal-content textarea {
+    margin-bottom: 14px !important;
+  }
+
+  #enquiryModal .modal-content button {
+    width: 100%;
+  }
 }
 
 /* iPhone SE / very small phones */
 @media (max-width: 420px) {
   .home-section {
-    padding-top: max(182px, calc(118px + env(safe-area-inset-top))) !important;
+    padding-top: max(56%, calc(136px + env(safe-area-inset-top))) !important;
   }
 
   .home-content {
-    margin-top: 8px;
+    margin-top: 0;
   }
 
-  #certBox .modal-content {
-    width: min(94vw, 360px);
-    min-width: 0;
-    max-width: 360px;
-    padding: 12px 10px;
+  #emailBox .modal-content,
+  #certBox .modal-content,
+  #enquiryModal .modal-content {
+    width: min(94vw, 320px);
+    max-width: 94vw;
+    padding-left: 9px;
+    padding-right: 9px;
   }
 
   #certBox .modal-content {
