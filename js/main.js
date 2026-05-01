@@ -716,9 +716,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const navItems = document.querySelectorAll('.nav-item[data-target]');
     const topBar = document.querySelector('.top-bar');
     const navToggle = document.getElementById('navToggle');
+    const navClose = document.getElementById('navClose');
     const siteNav = document.getElementById('siteNav');
     const navOverlay = document.getElementById('navOverlay');
     const contactTrigger = document.querySelector('.contact-nav');
+    const headerOffset = 92;
 
     function closeMobileNav() {
         if (!siteNav || !navToggle || !navOverlay) return;
@@ -742,6 +744,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     if (navOverlay) navOverlay.addEventListener('click', closeMobileNav);
+    if (navClose) navClose.addEventListener('click', closeMobileNav);
 
     navItems.forEach(item => {
         item.addEventListener('click', (event) => {
@@ -749,8 +752,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const targetId = item.getAttribute('data-target');
             const targetSection = document.getElementById(targetId);
             if (!targetSection) return;
-            targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
             closeMobileNav();
+            const scrollToTarget = () => {
+                const y = targetSection.getBoundingClientRect().top + window.scrollY - headerOffset;
+                window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+            };
+            requestAnimationFrame(scrollToTarget);
         });
     });
 
