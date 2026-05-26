@@ -713,13 +713,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     
     /* SINGLE PAGE NAVIGATION / REVEAL */
-    const navItems = document.querySelectorAll('.nav-item[data-target]');
+    const navItems = document.querySelectorAll('.nav-item[data-target], .footer-link[data-target]');
     const topBar = document.querySelector('.top-bar');
     const navToggle = document.getElementById('navToggle');
     const navClose = document.getElementById('navClose');
     const siteNav = document.getElementById('siteNav');
     const navOverlay = document.getElementById('navOverlay');
-    const contactTrigger = document.querySelector('.contact-nav');
+    const contactTriggers = document.querySelectorAll('.contact-nav');
     const headerOffset = 92;
 
     function closeMobileNav() {
@@ -761,12 +761,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    if (contactTrigger) {
-        contactTrigger.addEventListener('click', () => {
+    contactTriggers.forEach((trigger) => {
+        trigger.addEventListener('click', () => {
             document.getElementById('enquiryModal').style.display = 'flex';
             closeMobileNav();
         });
-    }
+    });
 
     const homeButton = document.querySelector('.home-button');
     const aboutLearnBtn = document.querySelector('.about-learn-btn');
