@@ -768,16 +768,18 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    const homeButton = document.querySelector('.home-button');
+    const homeButtons = document.querySelectorAll('.home-button[data-target]');
     const aboutLearnBtn = document.querySelector('.about-learn-btn');
-    if (homeButton) {
-        homeButton.addEventListener('click', () => {
-            const targetSection = document.getElementById('amc8Section');
-            if (targetSection) {
-                targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
+
+    homeButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            const targetId = button.getAttribute('data-target');
+            const targetSection = document.getElementById(targetId);
+            if (!targetSection) return;
+            const y = targetSection.getBoundingClientRect().top + window.scrollY - headerOffset;
+            window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
         });
-    }
+    });
 
     if (aboutLearnBtn) {
         aboutLearnBtn.addEventListener('click', () => {

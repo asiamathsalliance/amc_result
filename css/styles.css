@@ -325,11 +325,19 @@ button {
   transition: all 0.2s ease;
 }
 
+.home-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 32px;
+}
+
 .home-button,
 #button1,
 #amc8-button1,
 #aime-button1 {
-  margin-top: 32px;
+  margin-top: 0;
   min-height: 48px;
   border-radius: var(--radius-pill);
   border: none;
@@ -1266,9 +1274,14 @@ select:valid {
   #button1, #button2,
   #amc8-button1, #amc8-button2,
   #aime-button1, #aime-button2,
-  .home-button {
+  .home-buttons {
     width: 100%;
     margin-top: 12px;
+  }
+
+  .home-button {
+    width: 100%;
+    margin-top: 0;
   }
 
   .name-row {
