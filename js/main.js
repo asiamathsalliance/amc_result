@@ -769,7 +769,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     const homeButtons = document.querySelectorAll('.home-button[data-target]');
-    const aboutLearnBtn = document.querySelector('.about-learn-btn');
 
     homeButtons.forEach((button) => {
         button.addEventListener('click', () => {
@@ -780,12 +779,6 @@ document.addEventListener('DOMContentLoaded', function() {
             window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
         });
     });
-
-    if (aboutLearnBtn) {
-        aboutLearnBtn.addEventListener('click', () => {
-            closeMobileNav();
-        });
-    }
 
     document.querySelectorAll('.reveal-section').forEach((section) => {
         section.classList.add('is-visible');

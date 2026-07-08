@@ -34,6 +34,7 @@
         <nav class="top-texts" id="siteNav">
             <button type="button" class="nav-close" id="navClose" aria-label="Close menu">&times;</button>
             <a class="nav-item active" href="#homeSection" data-target="homeSection">Home</a>
+            <a class="nav-item" href="#registrationSection" data-target="registrationSection">Registration</a>
             <a class="nav-item" href="#amcSection" data-target="amcSection">AMC 10/12</a>
             <a class="nav-item" href="#amc8Section" data-target="amc8Section">AMC 8</a>
             <a class="nav-item" href="#aimeSection" data-target="aimeSection">AIME</a>
@@ -57,8 +58,7 @@
                 </p>
                 <div class="home-buttons">
                     <button class="home-button" type="button" data-target="amc8Section">View AMC 8 2026 Result</button>
-                    <button class="home-button" type="button" data-target="amcSection">View AMC 10/12 2025 Result</button>
-                    <button class="home-button" type="button" data-target="aimeSection">View AIME II 2026 Result</button>
+                    <button class="home-button home-button-waitlist" type="button" data-target="registrationSection">AMC 10/12 Waitlist</button>
                 </div>
             </div>
         </section>
@@ -76,7 +76,53 @@
                         Our mission is to build confidence, curiosity, and problem-solving excellence by connecting learners across
                         Southeast Asia with meaningful contest experiences.
                     </p>
-                    <a class="about-learn-btn" href="https://www.facebook.com/AsiaMathSG/" target="_blank" rel="noopener noreferrer">Learn More</a>
+                    <div class="about-social-icons" aria-label="Asia Math Alliance links">
+                        <a class="about-social-btn" href="https://asiamathsalliance.com/" target="_blank" rel="noopener noreferrer" aria-label="Asia Maths Alliance website">
+                            <svg class="about-social-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm7.93 9h-3.17a15.7 15.7 0 0 0-1.2-4.32A8.03 8.03 0 0 1 19.93 11zM12 4.07c.95 1.37 1.74 3.08 2.12 5.03H9.88C10.26 7.15 11.05 5.44 12 4.07zM8.27 4.68A15.7 15.7 0 0 0 7.07 11H3.9a8.03 8.03 0 0 1 4.37-6.32zM3.9 13h3.17c.26 1.55.7 3.01 1.2 4.32A8.03 8.03 0 0 1 3.9 13zm5.97 6.25c-.38-1.95-1.17-3.66-2.12-5.03h4.24c-.38 1.37-1.17 3.08-2.12 5.03zM15.73 19.32c.5-1.31.94-2.77 1.2-4.32h3.17a8.03 8.03 0 0 1-4.37 4.32zM16.93 11c-.26-1.55-.7-3.01-1.2-4.32A8.03 8.03 0 0 1 20.1 13h-3.17z"/></svg>
+                        </a>
+                        <a class="about-social-btn" href="https://www.facebook.com/AsiaMathSG/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                            <svg class="about-social-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M24 12.073c0-6.627-5.373-12-12-12S0 5.446 0 12.073c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        </a>
+                        <a class="about-social-btn" href="mailto:asiamaths@gmail.com" aria-label="Email">
+                            <svg class="about-social-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5L4 8V6l8 5 8-5v2z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="registrationSection" class="section-block reveal-section">
+            <div class="registration-content">
+                <div class="registration-text-wrap">
+                    <span class="section-chip">Registration</span>
+                    <h1>AMC 10/12 Waitlist</h1>
+                    <p class="registration-description">
+                        Sign up for the waitlist for the American Mathematics Competitions 2026–27 cycle.
+                        AMC 10/12 A and B run in November 2026, and AMC 8 runs in January 2027.
+                        Join now to be first in line when registration opens for Southeast Asia.
+                    </p>
+                    <div class="registration-spec-grid">
+                        <div class="registration-spec-card">
+                            <span class="registration-spec-label">Questions</span>
+                            <span class="registration-spec-value">25 MCQ</span>
+                        </div>
+                        <div class="registration-spec-card">
+                            <span class="registration-spec-label">Duration</span>
+                            <span class="registration-spec-value">75 minutes</span>
+                        </div>
+                        <div class="registration-spec-card">
+                            <span class="registration-spec-label">Answer choices</span>
+                            <span class="registration-spec-value">5 (A–E)</span>
+                        </div>
+                        <div class="registration-spec-card">
+                            <span class="registration-spec-label">Calculator</span>
+                            <span class="registration-spec-value">Not allowed</span>
+                        </div>
+                    </div>
+                    <a class="registration-btn" href="https://tinyurl.com/2026amcfirst" target="_blank" rel="noopener noreferrer">Register</a>
+                </div>
+                <div class="registration-image-wrap">
+                    <img src="2026_amc_cycle.png" alt="AMC 2026-2027 competition schedule flyer" class="registration-flyer-img" width="1200" height="1600">
                 </div>
             </div>
         </section>
@@ -175,6 +221,12 @@
                             <a class="footer-link footer-item" href="#aboutSection" data-target="aboutSection">
                                 <svg class="footer-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
                                 <span>About</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="footer-link footer-item" href="#registrationSection" data-target="registrationSection">
+                                <svg class="footer-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm-2 10H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                                <span>Registration</span>
                             </a>
                         </li>
                         <li>

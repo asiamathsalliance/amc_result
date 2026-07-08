@@ -183,19 +183,28 @@ main {
 
 #homeSection {
   position: relative;
-  min-height: calc(100svh - 76px);
+  min-height: calc(100svh - 76px - clamp(40px, 6vh, 64px));
   border-top: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  background:
+  background-color: var(--navy);
+  background-image:
     linear-gradient(rgba(13, 10, 62, 0.45), rgba(13, 10, 62, 0.55)),
-    url("../background-images/background3.jpg") center/cover no-repeat;
+    url("../background-images/background3.jpg");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 #aboutSection {
   background: #ffffff;
+  overflow: visible;
+}
+
+#aboutSection.section-block {
+  padding-inline: clamp(20px, 5vw, 56px);
 }
 
 .about-content {
@@ -209,15 +218,53 @@ main {
 }
 
 .about-logo-wrap {
-  flex: 0 0 34%;
+  flex: 0 0 clamp(34%, 36vw, 42%);
+  max-width: min(100%, 420px);
   display: flex;
   justify-content: center;
+  align-items: center;
+  min-width: 0;
+  overflow: visible;
+  padding-inline: clamp(8px, 2vw, 16px);
 }
 
 .about-logo {
-  width: min(100%, 320px);
+  max-width: min(100%, clamp(260px, 28vw, 360px));
+  width: 100%;
   height: auto;
   display: block;
+  object-fit: contain;
+  object-position: center center;
+}
+
+.about-social-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.about-social-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-pill);
+  background: rgba(13, 10, 62, 0.08);
+  color: #6b6f8e;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.about-social-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.about-social-btn:hover {
+  background: var(--chartreuse);
+  color: var(--navy);
+  transform: translateY(-2px);
 }
 
 .about-text-wrap {
@@ -236,24 +283,113 @@ main {
   line-height: 1.65;
 }
 
-.about-learn-btn {
+#registrationSection {
+  background: var(--section-soft);
+}
+
+.registration-content {
+  max-width: 1180px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 4vw, 56px);
+}
+
+.registration-text-wrap {
+  flex: 1 1 52%;
+  text-align: left;
+}
+
+.registration-text-wrap h1 {
+  margin-bottom: 12px;
+}
+
+.registration-description {
+  margin: 0;
+  max-width: 560px;
+  color: var(--text-body);
+  font-size: clamp(1rem, 1.8vw, 1.08rem);
+  line-height: 1.65;
+  text-align: justify;
+  text-align-last: left;
+  text-justify: inter-word;
+}
+
+.registration-spec-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  max-width: 560px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.registration-spec-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 18px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid rgba(13, 10, 62, 0.1);
+}
+
+.registration-spec-label {
+  font-size: 0.88rem;
+  color: var(--text-body);
+}
+
+.registration-spec-value {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.2;
+}
+
+.registration-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-top: 18px;
+  margin-top: 38px;
   min-height: 46px;
   padding: 10px 24px;
   border-radius: var(--radius-pill);
-  background: var(--navy);
-  color: #ffffff;
-  font-weight: 600;
+  background: var(--chartreuse);
+  color: var(--navy);
+  font-weight: 700;
   transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
-.about-learn-btn:hover {
-  background: #17106a;
+.registration-btn:hover {
+  background: #b9d85f;
   transform: translateY(-1px);
-  box-shadow: 0 8px 18px rgba(13, 10, 62, 0.25);
+  box-shadow: 0 8px 18px rgba(13, 10, 62, 0.18);
+}
+
+.registration-image-wrap {
+  flex: 0 0 44%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: min(100%, 480px);
+  margin: clamp(14px, 2.5vw, 24px);
+  padding: clamp(20px, 3.5vw, 32px);
+  border: 2px solid #000000;
+  background: #ffffff;
+  box-sizing: border-box;
+}
+
+.registration-flyer-img {
+  width: calc(100% - clamp(12px, 2vw, 20px));
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: clamp(4px, 0.8vw, 8px) auto;
+  border: none;
+  background: #ffffff;
+  box-sizing: border-box;
 }
 
 #homeSection::before {
@@ -284,7 +420,7 @@ main {
 .home-content {
   position: relative;
   z-index: 1;
-  width: min(100%, 760px);
+  width: min(100%, 980px);
   margin-inline: auto;
   text-align: center;
 }
@@ -310,6 +446,7 @@ main {
 
 .home-content p {
   margin: 0 auto;
+  max-width: min(100%, 920px);
   color: #eef0ff;
   font-size: clamp(1rem, 2vw, 1.2rem);
   line-height: 1.65;
@@ -366,10 +503,23 @@ button {
   background: rgba(212, 238, 138, 0.16);
 }
 
+.home-button-waitlist {
+  background: var(--chartreuse);
+  border: 2px solid var(--chartreuse);
+  color: var(--navy);
+}
+
+.home-button-waitlist:hover {
+  background: #b9d85f;
+  border-color: #b9d85f;
+  color: var(--navy);
+  box-shadow: 0 10px 26px rgba(13, 10, 62, 0.22);
+}
+
 #button2,
 #amc8-button2,
 #aime-button2 {
-  margin-top: 32px;
+  margin-top: 0;
   min-height: 48px;
   border-radius: var(--radius-pill);
   border: 2px solid var(--navy);
@@ -392,8 +542,10 @@ button {
 }
 
 #amcSection.section-block,
-#amc8Section.section-block {
+#aimeSection.section-block {
   min-height: 76vh;
+  padding-top: clamp(36px, 5vw, 52px);
+  padding-bottom: clamp(36px, 5vw, 52px);
 }
 
 #amc8Section {
@@ -401,8 +553,9 @@ button {
 }
 
 #amc8Section.section-block {
-  padding-top: clamp(40px, 6vw, 62px);
-  padding-bottom: clamp(40px, 6vw, 62px);
+  min-height: 62vh;
+  padding-top: clamp(28px, 4vw, 40px);
+  padding-bottom: clamp(28px, 4vw, 40px);
   display: flex;
   align-items: center;
 }
@@ -466,7 +619,7 @@ button {
 
 .amc-text {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: clamp(20px, 4vw, 58px);
 }
 
@@ -480,8 +633,14 @@ button {
 }
 
 .amc1012-image-col,
-.amc8-image-col {
+.amc8-image-col,
+.aime-image-col {
   flex: 0 0 54%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  margin-top: clamp(20px, 4vh, 40px);
 }
 
 .aime-row {
@@ -491,10 +650,6 @@ button {
 
 .aime-row .text-block {
   flex: 0 0 46%;
-}
-
-.aime-image-col {
-  flex: 0 0 54%;
 }
 
 .aime-hero-img {
@@ -561,8 +716,12 @@ button {
   justify-content: center;
   align-items: center;
   gap: 14px;
-  margin-top: 28px;
+  margin-top: clamp(44px, 6vh, 64px);
   flex-wrap: wrap;
+}
+
+.button-container button {
+  margin-top: 0;
 }
 
 /* Dark modals remain */
@@ -1273,7 +1432,11 @@ select:valid {
 
   #button1, #button2,
   #amc8-button1, #amc8-button2,
-  #aime-button1, #aime-button2,
+  #aime-button1, #aime-button2 {
+    width: 100%;
+    margin-top: 0;
+  }
+
   .home-buttons {
     width: 100%;
     margin-top: 12px;
@@ -1282,6 +1445,15 @@ select:valid {
   .home-button {
     width: 100%;
     margin-top: 0;
+  }
+
+  .home-content {
+    width: 100%;
+    padding-top: clamp(24px, 6vh, 48px);
+  }
+
+  .home-content p {
+    max-width: 100%;
   }
 
   .name-row {
@@ -1302,6 +1474,42 @@ select:valid {
 
   .about-logo-wrap,
   .about-text-wrap {
+    width: 100%;
+  }
+
+  .about-logo-wrap {
+    justify-content: center;
+    max-width: 100%;
+    padding-inline: 12px;
+  }
+
+  .about-logo {
+    max-width: min(100%, clamp(220px, 68vw, 320px));
+    margin-inline: auto;
+    object-position: center center;
+  }
+
+  .registration-spec-grid {
+    max-width: 100%;
+  }
+
+  .registration-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .registration-text-wrap,
+  .registration-image-wrap {
+    width: 100%;
+    flex: 1 1 auto;
+  }
+
+  .registration-image-wrap {
+    max-width: min(100%, 360px);
+    margin-inline: auto;
+  }
+
+  .registration-flyer-img {
     width: 100%;
   }
 
