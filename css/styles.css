@@ -181,6 +181,11 @@ main {
   align-items: center;
 }
 
+.section-block p {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
 #homeSection {
   position: relative;
   min-height: calc(100svh - 76px - clamp(40px, 6vh, 64px));
@@ -218,8 +223,8 @@ main {
 }
 
 .about-logo-wrap {
-  flex: 0 0 clamp(34%, 36vw, 42%);
-  max-width: min(100%, 420px);
+  flex: 0 0 clamp(38%, 40vw, 46%);
+  max-width: min(100%, 500px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -229,7 +234,7 @@ main {
 }
 
 .about-logo {
-  max-width: min(100%, clamp(260px, 28vw, 360px));
+  max-width: min(100%, clamp(300px, 34vw, 430px));
   width: 100%;
   height: auto;
   display: block;
@@ -281,6 +286,8 @@ main {
   max-width: 680px;
   color: var(--text-body);
   line-height: 1.65;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 #registrationSection {
@@ -1484,7 +1491,7 @@ select:valid {
   }
 
   .about-logo {
-    max-width: min(100%, clamp(220px, 68vw, 320px));
+    max-width: min(100%, clamp(250px, 76vw, 360px));
     margin-inline: auto;
     object-position: center center;
   }
