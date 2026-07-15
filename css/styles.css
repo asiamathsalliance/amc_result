@@ -428,7 +428,7 @@ main {
 #practiceSection {
   position: relative;
   overflow: hidden;
-  background: var(--section-lavender);
+  background: #ffffff;
   display: block;
 }
 
