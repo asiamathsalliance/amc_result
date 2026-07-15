@@ -51,10 +51,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const downloadContainer = document.getElementById('downloadContainer');
     const downloadOverlay = document.getElementById('downloadOverlay');
-    downloadOverlay.style.display = 'none'; // hide initially
-    downloadContainer.style.display = 'none'; // hide initially
-
     const progressBar = document.getElementById('downloadBar');
+
+    function showDownloadOverlay() {
+        if (!downloadOverlay || !downloadContainer) return;
+        downloadOverlay.classList.add('is-open');
+        downloadOverlay.style.display = 'flex';
+        downloadContainer.style.display = 'flex';
+    }
+
+    function hideDownloadOverlay() {
+        if (!downloadOverlay || !downloadContainer) return;
+        downloadOverlay.classList.remove('is-open');
+        downloadOverlay.style.display = 'none';
+        downloadContainer.style.display = 'none';
+        if (progressBar) progressBar.style.width = '0%';
+        const message = document.getElementById('downloadLabel');
+        if (message) message.textContent = '';
+    }
+
+    hideDownloadOverlay();
+
     const categorySelect = document.getElementById('categorySelect');
 
     /*get result modal box elements*/
@@ -641,8 +658,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     /* DOWNLOAD CERTIFICATE WITH PROGRESS BAR */
     function downloadCertificate() {
-        downloadOverlay.style.display = 'flex';
-        downloadContainer.style.display = 'flex';
+        showDownloadOverlay();
         const message = document.getElementById('downloadLabel');
         message.textContent = "Downloading...";
 
@@ -667,9 +683,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 link.click();
 
                 setTimeout(() => {
-                    downloadOverlay.style.display = "none";
-                    downloadContainer.style.display = "none";
-                    message.textContent = "";
+                    hideDownloadOverlay();
                     emailBox.style.display = 'none';
                     document.getElementById("categorySelect").selectedIndex = 0;
                     document.getElementById("categorySelect").style.color = "#999";
@@ -682,8 +696,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function submitEnquiry() {
         sendEnquiryEmail();
-        downloadOverlay.style.display = 'flex';
-        downloadContainer.style.display = 'flex';
+        showDownloadOverlay();
         const message = document.getElementById('downloadLabel');
         message.textContent = "Submitting enquiry...";
 
@@ -700,9 +713,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 clearInterval(interval);
                 
                 setTimeout(() => {
-                    downloadOverlay.style.display = "none";
-                    downloadContainer.style.display = "none";
-                    message.textContent = "";
+                    hideDownloadOverlay();
                     document.getElementById("enquiryModal").style.display = "none";
                     document.getElementById("enquiryMessage").value = "";
                 }, 2000);
@@ -720,6 +731,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const siteNav = document.getElementById('siteNav');
     const navOverlay = document.getElementById('navOverlay');
     const contactTriggers = document.querySelectorAll('.contact-nav');
+    const headerHeight = 76;
     const headerOffset = 92;
 
     function closeMobileNav() {
@@ -734,6 +746,26 @@ document.addEventListener('DOMContentLoaded', function() {
         siteNav.classList.add('is-open');
         navOverlay.classList.add('is-open');
         navToggle.setAttribute('aria-expanded', 'true');
+    }
+
+    function scrollToSection(targetSection) {
+        if (!targetSection) return;
+
+        const sectionTop = targetSection.getBoundingClientRect().top + window.scrollY;
+        const sectionHeight = targetSection.offsetHeight;
+        const availableHeight = window.innerHeight - headerHeight;
+        let y;
+
+        // Keep the hero pinned to the top; center other sections in the visible area below the nav.
+        if (targetSection.id === 'homeSection') {
+            y = 0;
+        } else if (sectionHeight >= availableHeight) {
+            y = sectionTop - headerOffset;
+        } else {
+            y = sectionTop - headerHeight - ((availableHeight - sectionHeight) / 2);
+        }
+
+        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
     }
 
     if (navToggle) {
@@ -753,11 +785,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const targetSection = document.getElementById(targetId);
             if (!targetSection) return;
             closeMobileNav();
-            const scrollToTarget = () => {
-                const y = targetSection.getBoundingClientRect().top + window.scrollY - headerOffset;
-                window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
-            };
-            requestAnimationFrame(scrollToTarget);
+            requestAnimationFrame(() => scrollToSection(targetSection));
         });
     });
 
@@ -774,9 +802,7 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', () => {
             const targetId = button.getAttribute('data-target');
             const targetSection = document.getElementById(targetId);
-            if (!targetSection) return;
-            const y = targetSection.getBoundingClientRect().top + window.scrollY - headerOffset;
-            window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+            scrollToSection(targetSection);
         });
     });
 

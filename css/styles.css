@@ -28,7 +28,8 @@ body {
   width: 100%;
   min-height: 100%;
   scroll-behavior: auto;
-  overflow-x: hidden;
+  overflow-x: clip;
+  max-width: 100%;
 }
 
 body {
@@ -1082,11 +1083,22 @@ select:valid {
   justify-content: center;
   align-items: center;
   background: rgba(7, 12, 28, 0.62);
+  pointer-events: none;
+}
+
+#downloadOverlay.is-open {
+  display: flex;
+  pointer-events: auto;
 }
 
 #downloadContainer {
+  display: none;
   width: min(460px, 84vw);
   margin: 0 auto;
+}
+
+#downloadOverlay.is-open #downloadContainer {
+  display: flex;
 }
 
 #downloadBarWrapper {
