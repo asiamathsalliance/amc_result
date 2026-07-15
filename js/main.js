@@ -762,6 +762,8 @@ document.addEventListener('DOMContentLoaded', function() {
             y = 0;
         } else if (targetSection.id === 'registrationSection') {
             y = sectionTop - headerHeight + 28;
+        } else if (targetSection.id === 'practiceSection') {
+            y = sectionTop - headerHeight - ((availableHeight - sectionHeight) / 2);
         } else if (sectionHeight >= availableHeight) {
             y = sectionTop - headerOffset;
         } else {
@@ -799,7 +801,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    const homeButtons = document.querySelectorAll('.home-button[data-target]');
+    const homeButtons = document.querySelectorAll('.home-button[data-target], .registration-btn[data-target]');
 
     homeButtons.forEach((button) => {
         button.addEventListener('click', () => {
