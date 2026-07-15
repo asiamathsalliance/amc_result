@@ -757,8 +757,11 @@ document.addEventListener('DOMContentLoaded', function() {
         let y;
 
         // Keep the hero pinned to the top; center other sections in the visible area below the nav.
+        // Registration is tall with a flyer — pin it higher under the nav (don't center).
         if (targetSection.id === 'homeSection') {
             y = 0;
+        } else if (targetSection.id === 'registrationSection') {
+            y = sectionTop - headerHeight + 28;
         } else if (sectionHeight >= availableHeight) {
             y = sectionTop - headerOffset;
         } else {
